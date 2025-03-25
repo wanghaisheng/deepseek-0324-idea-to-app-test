@@ -1,132 +1,493 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta name="keywords" content="mobile, simulator, mobile design, mobile app">
-  <meta name="author" content="Your Name or Company">
-  <meta http-equiv="Content-Language" content="en">
-
-  <!-- Canonical Link -->
-  <link rel="canonical" href="https://www.yourwebsite.com/pc-simulator" />
-
-  <!-- Open Graph for Social Media -->
-  <meta property="og:title" content="PC Simulator">
-  <meta property="og:description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta property="og:image" content="https://www.yourwebsite.com/pc-simulator-image.jpg">
-  <meta property="og:url" content="https://www.yourwebsite.com/pc-simulator">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PC Simulator">
-  <meta name="twitter:description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta name="twitter:image" content="https://www.yourwebsite.com/pc-simulator-image.jpg">
-  <meta name="twitter:creator" content="@yourtwitterhandle">
-
-  <!-- Favicon -->
-  <link rel="icon" href="https://www.yourwebsite.com/favicon.ico" type="image/x-icon">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-XXXXX-Y');
-  </script>
-
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y) {
-      window.clarity=window.clarity||function(){(clarity.q=clarity.q||[]).push(arguments)};
-      clarity('set', 'anonymizeIP', true);
-      i=l.createElement('script');i.async=1;i.src=r;i.type='text/javascript';
-      t=l.getElementsByTagName('script')[0];t.parentNode.insertBefore(i,t);
-    })(document,window,'script','https://www.clarity.ms/tag/XXXXXX');
-  </script>
-
-  <title>PC Simulator</title>
-
+  <title>Cosmic Connections UI设计</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Global Styles */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+    
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
+      font-family: 'Noto Sans SC', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
     }
-
-    .mobile-container {
-      width: 360px;
-      height: 640px;
-      border: 16px solid black;
-      border-radius: 16px;
-      background-color: #fff;
+    
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      border: 12px solid #1a1a1a;
+      border-radius: 40px;
+      overflow: hidden;
       position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    
+    .screen {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      background: white;
+    }
+    
+    .page-container {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      width: 1500px;
+      height: 100%;
+      transition: transform 0.3s ease;
     }
-
-    .content {
-      font-size: 1.2rem;
-      color: #333;
+    
+    .page {
+      width: 375px;
+      height: 100%;
+      flex-shrink: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
-
-    /* Adjustments for PC */
-    @media (min-width: 768px) {
-      .mobile-container {
-        width: 600px;
-        height: 1000px;
-      }
-
-      .content {
-        font-size: 1.5rem;
-      }
+    
+    .nav-item.active {
+      color: #7c3aed;
+      position: relative;
     }
-
-    @media (min-width: 1024px) {
-      .mobile-container {
-        width: 800px;
-        height: 1400px;
-      }
-
-      .content {
-        font-size: 1.8rem;
-      }
+    
+    .nav-item.active:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #7c3aed;
     }
-
-    /* Additional responsiveness for larger screens */
-    @media (min-width: 1200px) {
-      body {
-        justify-content: flex-start;
-      }
-
-      .mobile-container {
-        margin-top: 50px;
-      }
+    
+    .card {
+      transition: all 0.2s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .test-card {
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .match-card {
+      transition: all 0.3s ease;
+    }
+    
+    .match-card:hover {
+      transform: scale(1.02);
+    }
+    
+    .like-btn:hover {
+      background: rgba(74, 222, 128, 0.1);
+    }
+    
+    .pass-btn:hover {
+      background: rgba(248, 113, 113, 0.1);
     }
   </style>
 </head>
-
-<body>
-  <div class="mobile-container">
-    <div class="content">
-      <p>Mobile Simulator Screen</p>
-      <p>PC Version: Adjusted for larger screens.</p>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="phone-frame">
+    <div class="screen">
+      <!-- 页面容器 -->
+      <div class="page-container" id="pageContainer">
+        <!-- 首页/发现页 -->
+        <div class="page" id="discover">
+          <div class="h-full flex flex-col">
+            <!-- 顶部标题 -->
+            <div class="p-4">
+              <h1 class="text-2xl font-bold text-gray-900">发现灵魂伴侣</h1>
+              <p class="text-sm text-gray-500 mt-1">基于多维度的深度匹配</p>
+            </div>
+            
+            <!-- 匹配卡片 -->
+            <div class="flex-1 flex items-center justify-center px-4">
+              <div class="w-full max-w-xs h-96 bg-white rounded-2xl overflow-hidden shadow-lg relative match-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                     class="w-full h-full object-cover">
+                
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                  <div class="text-white">
+                    <h3 class="font-bold text-xl">张明, 28</h3>
+                    <div class="flex items-center mt-1">
+                      <span class="text-sm bg-purple-100 bg-opacity-20 px-2 py-1 rounded-full mr-2">INTP</span>
+                      <span class="text-sm bg-purple-100 bg-opacity-20 px-2 py-1 rounded-full">属鼠</span>
+                    </div>
+                    <p class="text-sm mt-2 opacity-90">八字匹配度: 92%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 操作按钮 -->
+            <div class="flex justify-center items-center p-6 space-x-8">
+              <button class="w-16 h-16 rounded-full flex items-center justify-center border-2 border-red-400 pass-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              
+              <button class="w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </button>
+              
+              <button class="w-16 h-16 rounded-full flex items-center justify-center border-2 border-green-400 like-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 测试页 -->
+        <div class="page bg-gray-50" id="tests">
+          <div class="p-4">
+            <h1 class="text-2xl font-bold text-gray-900">个性测试</h1>
+            <p class="text-sm text-gray-500 mt-1">完成测试获取更精准匹配</p>
+            
+            <div class="mt-6 grid grid-cols-2 gap-4">
+              <!-- 八字测试 -->
+              <div class="card bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="h-32 test-card" style="background-image: url('https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80')">
+                  <div class="h-full flex items-end p-3 bg-gradient-to-t from-black to-transparent">
+                    <h3 class="text-white font-medium">八字排盘</h3>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <p class="text-xs text-gray-500">已完成 80%</p>
+                  <div class="mt-1 h-1 w-full bg-gray-200 rounded-full">
+                    <div class="h-1 bg-purple-500 rounded-full" style="width: 80%"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 属相测试 -->
+              <div class="card bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="h-32 test-card" style="background-image: url('https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80')">
+                  <div class="h-full flex items-end p-3 bg-gradient-to-t from-black to-transparent">
+                    <h3 class="text-white font-medium">生肖属相</h3>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <p class="text-xs text-gray-500">已完成 100%</p>
+                  <div class="mt-1 h-1 w-full bg-gray-200 rounded-full">
+                    <div class="h-1 bg-green-500 rounded-full" style="width: 100%"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- MBTI测试 -->
+              <div class="card bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="h-32 test-card" style="background-image: url('https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80')">
+                  <div class="h-full flex items-end p-3 bg-gradient-to-t from-black to-transparent">
+                    <h3 class="text-white font-medium">MBTI性格</h3>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <p class="text-xs text-gray-500">已完成 45%</p>
+                  <div class="mt-1 h-1 w-full bg-gray-200 rounded-full">
+                    <div class="h-1 bg-yellow-500 rounded-full" style="width: 45%"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- HSP测试 -->
+              <div class="card bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="h-32 test-card" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80')">
+                  <div class="h-full flex items-end p-3 bg-gradient-to-t from-black to-transparent">
+                    <h3 class="text-white font-medium">高敏感测试</h3>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <p class="text-xs text-gray-500">未开始</p>
+                  <div class="mt-1 h-1 w-full bg-gray-200 rounded-full">
+                    <div class="h-1 bg-gray-400 rounded-full" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-8">
+              <h2 class="font-bold text-gray-900">推荐测试组合</h2>
+              <div class="mt-3 space-y-3">
+                <div class="card bg-white p-4 rounded-xl shadow-sm">
+                  <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div class="ml-3">
+                      <h3 class="font-medium">灵魂契合度测试</h3>
+                      <p class="text-xs text-gray-500">八字+MBTI综合评估</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="card bg-white p-4 rounded-xl shadow-sm">
+                  <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                    </div>
+                    <div class="ml-3">
+                      <h3 class="font-medium">最佳伴侣测试</h3>
+                      <p class="text-xs text-gray-500">属相+MBTI配对分析</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 消息页 -->
+        <div class="page" id="messages">
+          <div class="p-4">
+            <h1 class="text-2xl font-bold text-gray-900">消息</h1>
+            <p class="text-sm text-gray-500 mt-1">3条未读消息</p>
+            
+            <div class="mt-6 space-y-3">
+              <!-- 消息项 -->
+              <div class="card bg-white p-3 rounded-xl shadow-sm flex items-center">
+                <div class="w-12 h-12 rounded-full overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                       class="w-full h-full object-cover">
+                </div>
+                <div class="ml-3 flex-1">
+                  <div class="flex justify-between items-center">
+                    <h3 class="font-medium">李雨晴</h3>
+                    <span class="text-xs text-gray-400">12:30</span>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1 truncate">我们的八字匹配度很高，要不要聊聊...</p>
+                </div>
+                <div class="w-2 h-2 rounded-full bg-purple-500 ml-2"></div>
+              </div>
+              
+              <div class="card bg-white p-3 rounded-xl shadow-sm flex items-center">
+                <div class="w-12 h-12 rounded-full overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                       class="w-full h-full object-cover">
+                </div>
+                <div class="ml-3 flex-1">
+                  <div class="flex justify-between items-center">
+                    <h3 class="font-medium">王浩然</h3>
+                    <span class="text-xs text-gray-400">昨天</span>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1 truncate">我发现我们都是INTP型人格...</p>
+                </div>
+              </div>
+              
+              <div class="card bg-white p-3 rounded-xl shadow-sm flex items-center">
+                <div class="w-12 h-12 rounded-full overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                       class="w-full h-full object-cover">
+                </div>
+                <div class="ml-3 flex-1">
+                  <div class="flex justify-between items-center">
+                    <h3 class="font-medium">系统消息</h3>
+                    <span class="text-xs text-gray-400">周一</span>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-1 truncate">您有新的匹配建议，生肖属相非常契合</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 个人中心页 -->
+        <div class="page bg-gray-50" id="profile">
+          <div class="p-4">
+            <div class="flex items-center">
+              <div class="w-16 h-16 rounded-full overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                     class="w-full h-full object-cover">
+              </div>
+              <div class="ml-4">
+                <h1 class="text-xl font-bold text-gray-900">林小雨</h1>
+                <p class="text-sm text-gray-500">INFP | 属兔 | HSP</p>
+              </div>
+            </div>
+            
+            <div class="mt-6 bg-white rounded-xl shadow-sm p-4">
+              <h2 class="font-bold text-gray-900">我的匹配数据</h2>
+              
+              <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div class="text-2xl font-bold text-purple-600">92%</div>
+                  <div class="text-xs text-gray-500 mt-1">八字匹配</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-bold text-pink-500">88%</div>
+                  <div class="text-xs text-gray-500 mt-1">属相匹配</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-bold text-blue-500">95%</div>
+                  <div class="text-xs text-gray-500 mt-1">性格匹配</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4 bg-white rounded-xl shadow-sm p-4">
+              <h2 class="font-bold text-gray-900">我的测试结果</h2>
+              
+              <div class="mt-3 space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                      </svg>
+                    </div>
+                    <span class="ml-2 text-sm">八字排盘结果</span>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <span class="ml-2 text-sm">生肖属相分析</span>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                    <span class="ml-2 text-sm">MBTI性格报告</span>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <span class="ml-2 text-sm">高敏感测试结果</span>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4 bg-white rounded-xl shadow-sm p-4">
+              <h2 class="font-bold text-gray-900">设置</h2>
+              
+              <div class="mt-3 space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">匹配偏好设置</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">通知设置</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">隐私设置</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">帮助与反馈</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 底部导航 -->
+      <div class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex justify-around py-3">
+        <button class="nav-item active flex flex-col items-center text-xs" onclick="showPage('discover')">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <span class="mt-1">发现</span>
+        </button>
+        
+        <button class="nav-item flex flex-col items-center text-xs" onclick="showPage('tests')">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+          <span class="mt-1">测试</span>
+        </button>
+        
+        <button class="nav-item flex flex-col items-center text-xs" onclick="showPage('messages')">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          <span class="mt-1">消息</span>
+        </button>
+        
+        <button class="nav-item flex flex-col items-center text-xs" onclick="showPage('profile')">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+          <span class="mt-1">我的</span>
+        </button>
+      </div>
     </div>
   </div>
-</body>
 
+  <script>
+    function showPage(pageId) {
+      const pageContainer = document.getElementById('pageContainer');
+      const pages = ['discover', 'tests', 'messages', 'profile'];
+      const index = pages.indexOf(pageId);
+      pageContainer.style.transform = `translateX(-${index * 375}px)`;
+      
+      // 更新导航激活状态
+      document.querySelectorAll('.nav-item').forEach((item, i) => {
+        if (i === index) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+  </script>
+</body>
 </html>
