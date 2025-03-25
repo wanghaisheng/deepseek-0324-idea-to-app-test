@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五感疗愈·修真版</title>
+    <style>
+        :root {
+            --wood: #10B981;
+            --fire: #EF4444;
+            --earth: #F59E0B;
+            --metal: #6B7280;
+            --water: #3B82F6;
+            --dark-bg: #0f0e15;
+            --parchment: #f5e8c9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="rgba(59,130,246,0.1)" stroke-width="1"/></svg>');
+            background-size: 100px;
+        }
+        
+        /* 顶部导航 - 宗门玉牌样式 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: linear-gradient(to right, rgba(15,14,21,0.8), rgba(59,130,246,0.3));
+            border-bottom: 1px solid var(--water);
+            position: relative;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                var(--wood) 0%, 
+                var(--fire) 20%, 
+                var(--earth) 40%, 
+                var(--metal) 60%, 
+                var(--water) 80%);
+        }
+        
+        .sect-badge {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="%236B7280" stroke-width="2"/><path d="M30,50 Q50,20 70,50 Q50,80 30,50 Z" fill="none" stroke="%23EF4444" stroke-width="2"/></svg>') no-repeat center;
+            background-size: contain;
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+        
+        /* 洞天福地主界面 */
+        .realm-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+        }
+        
+        .realm-area {
+            background: rgba(30, 30, 40, 0.7);
+            border-radius: 8px;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid;
+            transition: transform 0.3s;
+        }
+        
+        .realm-area:hover {
+            transform: translateY(-5px);
+        }
+        
+        .realm-area::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+        
+        .wood-area {
+            border-color: var(--wood);
+        }
+        
+        .wood-area::before {
+            background: var(--wood);
+        }
+        
+        .fire-area {
+            border-color: var(--fire);
+        }
+        
+        .fire-area::before {
+            background: var(--fire);
+        }
+        
+        /* 功法卡片样式 */
+        .spell-card {
+            background: linear-gradient(to bottom right, rgba(245, 232, 201, 0.1), rgba(245, 232, 201, 0.05));
+            border: 1px solid rgba(245, 232, 201, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spell-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="rgba(245,232,201,0.5)" stroke-width="2"/></svg>') no-repeat center;
+            background-size: contain;
+            opacity: 0.5;
+        }
+        
+        .spell-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .spell-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--parchment);
+        }
+        
+        .spell-type {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        
+        .meridian-progress {
+            height: 6px;
+            background: rgba(245, 232, 201, 0.2);
+            border-radius: 3px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .channel {
+            height: 100%;
+            background: linear-gradient(to right, var(--wood), var(--fire));
+            border-radius: 3px;
+            position: relative;
+        }
+        
+        .channel::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 2px;
+            background: white;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        
+        .cultivate-btn {
+            background: linear-gradient(to bottom, var(--wood), #0e8a62);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .cultivate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* 境界进度条 */
+        .cultivation-rank {
+            background: rgba(30, 30, 40, 0.7);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem;
+            position: relative;
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+        
+        .rank-bar {
+            height: 10px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 5px;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .qi-flow {
+            height: 100%;
+            width: 65%;
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .qi-flow::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.3) 50%, 
+                rgba(255,255,255,0) 100%);
+            animation: flow 2s infinite;
+        }
+        
+        @keyframes flow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .meridian-points {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: -5px;
+            left: 0;
+            right: 0;
+        }
+        
+        .point {
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            border: 2px solid #555;
+            position: relative;
+        }
+        
+        .point.active {
+            background: var(--water);
+            border-color: white;
+            box-shadow: 0 0 10px var(--water);
+        }
+        
+        .point::after {
+            content: attr(data-rank);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+        
+        /* 底部导航 - 法宝栏 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+            background: rgba(15, 14, 21, 0.9);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 0.2rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        /* 动画效果 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 顶部导航 - 宗门玉牌 -->
+    <header class="header">
+        <div class="sect-badge"></div>
+        <h1>五感修真</h1>
+        <div class="user-avatar">☯</div>
+    </header>
+    
+    <!-- 境界进度 -->
+    <div class="cultivation-rank">
+        <div class="rank-info">
+            <h3>当前境界：练气·中期</h3>
+            <p>还需135点五行真气突破</p>
+        </div>
+        <div class="rank-bar">
+            <div class="meridian-points">
+                <span class="point active" data-rank="练气"></span>
+                <span class="point" data-rank="筑基"></span>
+                <span class="point" data-rank="金丹"></span>
+            </div>
+            <div class="qi-flow"></div>
+        </div>
+    </div>
+    
+    <!-- 洞天福地主界面 -->
+    <div class="realm-container">
+        <!-- 木灵药园 -->
+        <div class="realm-area wood-area">
+            <h2>🌿 木灵药园</h2>
+            <p>调理肝胆经络，提升生机活力</p>
+            
+            <div class="spell-card">
+                <div class="spell-header">
+                    <div>
+                        <div class="spell-title">青帝长生诀</div>
+                        <div class="spell-type">木系心法·初阶</div>
+                    </div>
+                    <div>🌱</div>
+                </div>
+                <div class="meridian-progress">
+                    <div class="channel" style="width: 65%"></div>
+                </div>
+                <button class="cultivate-btn">
+                    <span>结印修炼</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 火灵丹房 -->
+        <div class="realm-area fire-area">
+            <h2>🔥 火灵丹房</h2>
+            <p>调理心脉系统，增强生命活力</p>
+            
+            <div class="spell-card">
+                <div class="spell-header">
+                    <div>
+                        <div class="spell-title">赤明炼心诀</div>
+                        <div class="spell-type">火系心法·初阶</div>
+                    </div>
+                    <div>🔥</div>
+                </div>
+                <div class="meridian-progress">
+                    <div class="channel" style="width: 30%"></div>
+                </div>
+                <button class="cultivate-btn" style="background: linear-gradient(to bottom, var(--fire), #c22b04);">
+                    <span>结印修炼</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 土灵膳堂 -->
+        <div class="realm-area" style="border-color: var(--earth);">
+            <h2>🌾 土灵膳堂</h2>
+            <p>调理脾胃系统，增强消化功能</p>
+        </div>
+        
+        <!-- 金灵剑阁 -->
+        <div class="realm-area" style="border-color: var(--metal);">
+            <h2>⚔️ 金灵剑阁</h2>
+            <p>调理肺经系统，增强呼吸功能</p>
+        </div>
+    </div>
+    
+    <!-- 底部导航 - 法宝栏 -->
+    <nav class="nav-bar">
+        <a href="#" class="nav-item">
+            <div class="nav-icon" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z\"/></svg>')"></div>
+            <span>洞府</span>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z\"/></svg>')"></div>
+            <span>功法</span>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-7 7H3v4c0 1.1.9 2 2 2h4v-2H5v-4zM5 5h4V3H5c-1.1 0-2 .9-2 2v4h2V5zm14-2h-4v2h4v4h2V5c0-1.1-.9-2-2-2zm0 16h-4v2h4c1.1 0 2-.9 2-2v-4h-2v4z\"/></svg>')"></div>
+            <span>天劫</span>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\"/></svg>')"></div>
+            <span>宗门</span>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z\"/></svg>')"></div>
+            <span>典籍</span>
+        </a>
+    </nav>
+
+    <script>
+        // 简单的修炼功能交互
+        document.querySelectorAll('.cultivate-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 模拟修炼过程
+                const progressBar = this.closest('.spell-card').querySelector('.channel');
+                const currentWidth = parseFloat(progressBar.style.width) || 0;
+                const newWidth = Math.min(currentWidth + 15, 100);
+                progressBar.style.width = `${newWidth}%`;
+                
+                // 修炼反馈
+                if(newWidth >= 100) {
+                    this.textContent = "✅ 功法大成";
+                    this.style.background = "linear-gradient(to bottom, #10B981, #0e8a62)";
+                    
+                    // 解锁成就效果
+                    const card = this.closest('.realm-area');
+                    card.style.boxShadow = `0 0 15px ${getComputedStyle(card).borderColor}`;
+                    setTimeout(() => {
+                        card.style.boxShadow = 'none';
+                    }, 1000);
+                }
+                
+                // 更新境界进度
+                const qiFlow = document.querySelector('.qi-flow');
+                const currentQiWidth = parseFloat(getComputedStyle(qiFlow).width) / parseFloat(getComputedStyle(qiFlow.parentElement).width) * 100;
+                qiFlow.style.width = `${Math.min(currentQiWidth + 2, 100)}%`;
+            });
+        });
+        
+        // 简单的呼吸练习小游戏
+        function startBreathingExercise() {
+            alert("吸气... 屏息... 呼气...\n跟随节奏进行呼吸练习");
+        }
+    </script>
+</body>
+</html>
