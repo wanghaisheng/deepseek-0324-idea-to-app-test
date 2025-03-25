@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灵魂伴侣测试器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            border: 12px solid #1a1a1a;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .screen {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            background-color: #fdf2f8;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item.active {
+            color: #db2777;
+        }
+        
+        .nav-item.active svg {
+            fill: #db2777;
+        }
+        
+        .love-gradient {
+            background: linear-gradient(135deg, #db2777 0%, #ec4899 100%);
+        }
+        
+        .heart-beat {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .secondary-header {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #fbcfe8;
+        }
+        
+        .back-button {
+            margin-right: 12px;
+            color: #db2777;
+        }
+        
+        .page-content {
+            height: calc(100% - 60px);
+            overflow-y: auto;
+            padding-bottom: 80px;
+        }
+        
+        .option-card {
+            transition: all 0.2s ease;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(219, 39, 119, 0.15);
+        }
+        
+        .option-card.selected {
+            border: 2px solid #db2777;
+            background-color: #fdf2f8;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background-color: #fbcfe8;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #db2777;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="phone-frame">
+        <div class="screen">
+            <!-- 首页 -->
+            <div id="home-page" class="h-full flex flex-col">
+                <!-- 顶部导航 -->
+                <div class="flex justify-between items-center p-4">
+                    <h1 class="text-xl font-bold text-gray-800">灵魂伴侣测试器</h1>
+                    <button class="text-gray-600">
+                        <i class="fas fa-cog text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- 主要内容 -->
+                <div class="flex-1 overflow-y-auto px-4 pb-20">
+                    <div class="love-gradient rounded-2xl p-6 mb-4 text-white">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-heart text-3xl mr-3 heart-beat"></i>
+                            <div>
+                                <h2 class="text-xl font-bold">灵魂伴侣测试</h2>
+                                <p class="text-sm opacity-90">10个问题揭示你们的深层连接</p>
+                            </div>
+                        </div>
+                        <p class="text-sm mb-4 opacity-90">通过科学验证的问题评估你们的价值观、沟通方式和情感需求的匹配度</p>
+                        <button class="w-full py-3 bg-white text-pink-700 rounded-lg font-medium" onclick="startTest()">
+                            开始测试
+                        </button>
+                    </div>
+                    
+                    <!-- 测试说明 -->
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-3">测试说明</h2>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>测试包含10个精心设计的问题</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>每个问题有5个选项，选择最符合的答案</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>测试需要5-7分钟完成</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>结果将展示你们的灵魂契合度</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 成功案例 -->
+                    <div class="bg-white rounded-2xl p-6 card">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">真实用户反馈</h2>
+                        <div class="space-y-4">
+                            <div class="flex">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                     class="w-12 h-12 rounded-full object-cover mr-3">
+                                <div>
+                                    <h3 class="font-medium text-gray-800">林晓 & 王明</h3>
+                                    <p class="text-sm text-gray-600 mb-1">测试匹配度: 96%</p>
+                                    <p class="text-xs text-gray-500">"测试准确捕捉了我们的深层连接，结果令人惊讶地精准！"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 测试问题页面 -->
+            <div id="test-page" class="h-full flex flex-col hidden">
+                <div class="secondary-header">
+                    <button class="back-button" onclick="backToHome()">
+                        <i class="fas fa-arrow-left text-xl"></i>
+                    </button>
+                    <div class="flex-1 px-3">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar" style="width: 10%"></div>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-600" id="progress-text">1/10</span>
+                </div>
+                
+                <div class="page-content px-4">
+                    <div class="bg-white rounded-2xl p-6 my-4 card">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-6" id="question-text">你们对未来的生活愿景是否一致？</h2>
+                        
+                        <div class="space-y-3">
+                            <div class="option-card bg-white border border-gray-200 rounded-xl p-4 cursor-pointer" onclick="selectOption(1)">
+                                <p class="text-gray-800">完全一致，我们经常讨论并规划共同的未来</p>
+                            </div>
+                            
+                            <div class="option-card bg-white border border-gray-200 rounded-xl p-4 cursor-pointer" onclick="selectOption(2)">
+                                <p class="text-gray-800">大部分一致，只有少数细节需要协调</p>
+                            </div>
+                            
+                            <div class="option-card bg-white border border-gray-200 rounded-xl p-4 cursor-pointer" onclick="selectOption(3)">
+                                <p class="text-gray-800">有些方面一致，有些方面差异较大</p>
+                            </div>
+                            
+                            <div class="option-card bg-white border border-gray-200 rounded-xl p-4 cursor-pointer" onclick="selectOption(4)">
+                                <p class="text-gray-800">不太一致，但我们尊重彼此的差异</p>
+                            </div>
+                            
+                            <div class="option-card bg-white border border-gray-200 rounded-xl p-4 cursor-pointer" onclick="selectOption(5)">
+                                <p class="text-gray-800">差异很大，很少讨论未来规划</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="next-btn" class="w-full py-3 bg-gray-200 text-gray-600 rounded-lg font-medium mt-4" disabled onclick="nextQuestion()">
+                        下一题
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 测试结果页面 -->
+            <div id="result-page" class="h-full flex flex-col hidden">
+                <div class="secondary-header">
+                    <button class="back-button" onclick="backToHome()">
+                        <i class="fas fa-arrow-left text-xl"></i>
+                    </button>
+                    <h1 class="text-xl font-bold text-gray-800 flex-1">测试结果</h1>
+                </div>
+                
+                <div class="page-content px-4">
+                    <div class="flex flex-col items-center py-6">
+                        <div class="relative mb-6">
+                            <div class="w-32 h-32 rounded-full bg-pink-100 flex items-center justify-center">
+                                <i class="fas fa-heart text-5xl text-pink-500 heart-beat"></i>
+                            </div>
+                            <div class="absolute -bottom-2 -right-2 bg-pink-500 text-white rounded-full w-16 h-16 flex items-center justify-center border-4 border-white">
+                                <span class="text-xl font-bold" id="match-percent">87%</span>
+                            </div>
+                        </div>
+                        
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2" id="result-title">高度契合的灵魂伴侣</h2>
+                        <p class="text-sm text-gray-600 mb-6" id="result-subtitle">你们的连接超越了普通关系</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <h3 class="font-semibold text-gray-800 mb-3">匹配维度分析</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-700">价值观契合度</span>
+                                    <span class="text-sm font-medium text-pink-600">92%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-pink-600 h-2 rounded-full" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-700">情感需求匹配</span>
+                                    <span class="text-sm font-medium text-pink-600">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-pink-600 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-700">沟通方式协调</span>
+                                    <span class="text-sm font-medium text-pink-600">88%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-pink-600 h-2 rounded-full" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <h3 class="font-semibold text-gray-800 mb-3">关系建议</h3>
+                        <p class="text-sm text-gray-700" id="advice-text">
+                            你们展现出罕见的深层连接。继续保持开放和诚实的沟通，定期一起规划未来。
+                            你们的差异很小，但正是这些细微差异可以为关系增添活力。考虑建立定期"关系检查"的习惯，
+                            讨论彼此的成长和变化，这将帮助你们维持这种高水平的契合度。
+                        </p>
+                    </div>
+                    
+                    <button class="w-full py-3 bg-pink-600 text-white rounded-lg font-medium mb-4" onclick="shareResult()">
+                        <i class="fas fa-share-alt mr-2"></i>分享结果
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 底部导航 -->
+            <div id="main-nav" class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around py-3">
+                <button class="nav-item active flex flex-col items-center" onclick="showPage('home-page')">
+                    <i class="fas fa-home text-xl mb-1"></i>
+                    <span class="text-xs">首页</span>
+                </button>
+                
+                <button class="nav-item flex flex-col items-center" onclick="showPage('test-page')">
+                    <i class="fas fa-clipboard-list text-xl mb-1"></i>
+                    <span class="text-xs">测试</span>
+                </button>
+                
+                <button class="nav-item flex flex-col items-center" onclick="showPage('result-page')">
+                    <i class="fas fa-chart-pie text-xl mb-1"></i>
+                    <span class="text-xs">结果</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 当前页面状态
+        let currentPage = 'home-page';
+        let previousPage = '';
+        
+        // 测试数据
+        const questions = [
+            "你们对未来的生活愿景是否一致？",
+            "当你们意见不合时，通常如何解决分歧？",
+            "你们对亲密关系的需求程度是否相似？",
+            "你们能否在沉默中感到舒适自在？",
+            "你们对精神或信仰层面的追求是否一致？",
+            "当一方情绪低落时，另一方能否准确理解并提供支持？",
+            "你们对个人空间和独立时间的需求是否匹配？",
+            "你们能否在对方身上看到自己欣赏并希望培养的品质？",
+            "你们对金钱和物质生活的态度是否一致？",
+            "你们是否觉得对方能激发自己成为更好的人？"
+        ];
+        
+        let currentQuestion = 0;
+        let selectedOption = null;
+        let answers = [];
+        
+        // 显示页面函数
+        function showPage(pageId) {
+            // 记录当前页面为上一页
+            if (pageId === 'home-page' || pageId === 'test-page' || pageId === 'result-page') {
+                previousPage = currentPage;
+            }
+            
+            // 隐藏所有页面
+            document.querySelectorAll('.screen > div').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // 显示选中的页面
+            document.getElementById(pageId).classList.remove('hidden');
+            currentPage = pageId;
+            
+            // 更新导航状态
+            updateNavStatus(pageId);
+            
+            // 控制底部导航显示
+            toggleMainNav(pageId);
+        }
+        
+        // 返回首页
+        function backToHome() {
+            showPage('home-page');
+        }
+        
+        // 更新导航项状态
+        function updateNavStatus(pageId) {
+            // 如果是二级页面，不更新导航状态
+            if (!['home-page', 'test-page', 'result-page'].includes(pageId)) {
+                return;
+            }
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // 根据页面ID激活对应的导航项
+            const navMap = {
+                'home-page': 0,
+                'test-page': 1,
+                'result-page': 2
+            };
+            
+            if (navMap[pageId] !== undefined) {
+                document.querySelectorAll('.nav-item')[navMap[pageId]].classList.add('active');
+            }
+        }
+        
+        // 控制主导航显示/隐藏
+        function toggleMainNav(pageId) {
+            const mainNav = document.getElementById('main-nav');
+            
+            // 如果是测试或结果页面，显示底部导航
+            if (pageId === 'test-page' || pageId === 'result-page' || pageId === 'home-page') {
+                mainNav.classList.remove('hidden');
+            } else {
+                mainNav.classList.add('hidden');
+            }
+        }
+        
+        // 开始测试
+        function startTest() {
+            currentQuestion = 0;
+            answers = [];
+            showPage('test-page');
+            updateQuestion();
+        }
+        
+        // 更新问题
+        function updateQuestion() {
+            document.getElementById('question-text').textContent = questions[currentQuestion];
+            document.getElementById('progress-text').textContent = `${currentQuestion + 1}/${questions.length}`;
+            document.getElementById('progress-bar').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            
+            // 重置选项状态
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+                card.classList.remove('border-pink-500');
+            });
+            
+            selectedOption = null;
+            document.getElementById('next-btn').disabled = true;
+            document.getElementById('next-btn').classList.remove('bg-pink-600', 'text-white');
+            document.getElementById('next-btn').classList.add('bg-gray-200', 'text-gray-600');
+        }
+        
+        // 选择选项
+        function selectOption(option) {
+            selectedOption = option;
+            
+            // 更新UI
+            document.querySelectorAll('.option-card').forEach((card, index) => {
+                if (index + 1 === option) {
+                    card.classList.add('selected', 'border-pink-500');
+                } else {
+                    card.classList.remove('selected', 'border-pink-500');
+                }
+            });
+            
+            document.getElementById('next-btn').disabled = false;
+            document.getElementById('next-btn').classList.remove('bg-gray-200', 'text-gray-600');
+            document.getElementById('next-btn').classList.add('bg-pink-600', 'text-white');
+        }
+        
+        // 下一题
+        function nextQuestion() {
+            if (selectedOption) {
+                answers.push(selectedOption);
+                
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    updateQuestion();
+                } else {
+                    // 测试完成，显示结果
+                    showResult();
+                }
+            }
+        }
+        
+        // 显示结果
+        function showResult() {
+            // 计算匹配度 (简单示例)
+            const totalScore = answers.reduce((sum, answer) => sum + answer, 0);
+            const maxScore = questions.length * 5;
+            const matchPercent = Math.round((totalScore / maxScore) * 100);
+            
+            document.getElementById('match-percent').textContent = `${matchPercent}%`;
+            
+            // 根据匹配度设置结果标题和描述
+            let title, subtitle, advice;
+            
+            if (matchPercent >= 90) {
+                title = "高度契合的灵魂伴侣";
+                subtitle = "你们的连接超越了普通关系";
+                advice = "你们展现出罕见的深层连接。继续保持开放和诚实的沟通，定期一起规划未来。你们的差异很小，但正是这些细微差异可以为关系增添活力。考虑建立定期'关系检查'的习惯，讨论彼此的成长和变化，这将帮助你们维持这种高水平的契合度。";
+            } else if (matchPercent >= 70) {
+                title = "良好的潜在伴侣";
+                subtitle = "你们有成为灵魂伴侣的坚实基础";
+                advice = "你们在许多核心方面表现出良好的匹配度。关注那些存在差异的领域，通过开放对话加深理解。记住，灵魂伴侣关系是通过持续的努力和沟通培养出来的，而不仅仅是天生的契合。定期讨论你们的期望和需求，这将帮助你们的关系继续成长。";
+            } else if (matchPercent >= 50) {
+                title = "中等匹配度";
+                subtitle = "你们有一些共同点，但也有明显差异";
+                advice = "你们的关系展示出一些积极的连接点，但也存在需要关注的差异。这些差异不一定是问题，关键是如何处理它们。考虑专注于发展你们的沟通技巧，学习如何将差异转化为互补优势。关系咨询或情侣工作坊可能对你们有帮助。";
+            } else {
+                title = "基础匹配度较低";
+                subtitle = "你们可能需要更多努力来建立深层连接";
+                advice = "你们的测试结果显示目前匹配度较低。这不一定意味着你们不能建立有意义的关系，但可能需要更多的努力和沟通。考虑专注于：1) 明确表达各自的需求和期望；2) 寻找共同兴趣和价值观；3) 学习有效的冲突解决技巧。专业的关系指导可能会有所帮助。";
+            }
+            
+            document.getElementById('result-title').textContent = title;
+            document.getElementById('result-subtitle').textContent = subtitle;
+            document.getElementById('advice-text').textContent = advice;
+            
+            showPage('result-page');
+        }
+        
+        // 分享结果
+        function shareResult() {
+            alert("结果已复制到剪贴板，可以粘贴分享给伴侣！");
+            // 实际应用中这里会实现分享功能
+        }
+    </script>
+</body>
+</html>
