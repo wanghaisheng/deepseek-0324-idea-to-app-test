@@ -1,1 +1,466 @@
 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多玩家BlockBlast</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #1a1a2e;
+            color: #e6e6e6;
+        }
+        
+        .game-container {
+            width: 375px;
+            height: 812px;
+            border: 12px solid #4a4a6a;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 150, 255, 0.5);
+        }
+        
+        /* 科技风格UI元素 */
+        .tech-ui {
+            border: 2px solid #00b4d8;
+            background: rgba(0, 42, 82, 0.7);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+        }
+        
+        .tech-button {
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+            border: none;
+            color: white;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+            transition: all 0.3s;
+        }
+        
+        .tech-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.8);
+        }
+        
+        .tech-button:active {
+            transform: translateY(1px);
+        }
+        
+        /* 游戏块爆炸效果 */
+        @keyframes blockExplode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        
+        .block-explode {
+            animation: blockExplode 0.5s ease-out forwards;
+        }
+        
+        /* 排行榜动画 */
+        @keyframes rankPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .rank-pulse {
+            animation: rankPulse 2s infinite;
+        }
+        
+        /* 进度条 */
+        .progress-container {
+            height: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #00b4d8;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00b4d8, #90e0ef);
+            transition: width 0.3s ease;
+        }
+        
+        /* 玩家卡片 */
+        .player-card {
+            transition: all 0.3s;
+            border-left: 5px solid transparent;
+        }
+        
+        .player-card.current {
+            border-left: 5px solid #ffd700;
+            background: rgba(0, 42, 82, 0.9);
+        }
+        
+        .player-card.winning {
+            background: rgba(0, 128, 0, 0.3);
+        }
+        
+        /* 房间代码显示 */
+        .room-code {
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px #00b4d8;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-900">
+    <div class="game-container">
+        <!-- 游戏主界面 -->
+        <div id="game-screen" class="h-full flex flex-col">
+            <!-- 顶部游戏状态栏 -->
+            <div class="flex justify-between items-center p-4 tech-ui">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-2">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs">玩家1</div>
+                        <div class="text-sm text-cyan-300">Lv.15</div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="text-xs">剩余时间</div>
+                    <div class="text-xl text-yellow-300">01:30</div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="text-xs">当前分数</div>
+                    <div class="text-xl text-green-300">2,450</div>
+                </div>
+            </div>
+            
+            <!-- 游戏区域 -->
+            <div class="flex-1 relative overflow-hidden">
+                <!-- 游戏方块网格 -->
+                <div class="grid grid-cols-8 gap-1 p-2 absolute inset-0">
+                    <!-- 示例游戏方块 -->
+                    <div class="aspect-square bg-red-500 rounded-sm cursor-pointer flex items-center justify-center"
+                         onclick="blockClick(this, 'red')">
+                        <i class="fas fa-gem text-white"></i>
+                    </div>
+                    <!-- 更多方块... -->
+                </div>
+                
+                <!-- 连击提示 -->
+                <div id="combo-display" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-yellow-300 opacity-0">
+                    COMBO x3!
+                </div>
+            </div>
+            
+            <!-- 玩家排行榜 -->
+            <div class="tech-ui m-4 p-3 rounded-lg">
+                <h3 class="text-center text-cyan-300 mb-2">实时排名</h3>
+                <div class="space-y-2 max-h-40 overflow-y-auto">
+                    <div class="player-card current flex justify-between items-center p-2">
+                        <div class="flex items-center">
+                            <span class="text-yellow-300 mr-2">1</span>
+                            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center mr-2">
+                                <i class="fas fa-crown text-yellow-300"></i>
+                            </div>
+                            <span>玩家1 (你)</span>
+                        </div>
+                        <span class="text-green-300">2,450</span>
+                    </div>
+                    <div class="player-card flex justify-between items-center p-2">
+                        <div class="flex items-center">
+                            <span class="text-gray-400 mr-2">2</span>
+                            <div class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mr-2">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span>玩家2</span>
+                        </div>
+                        <span class="text-green-300">1,980</span>
+                    </div>
+                    <!-- 更多玩家... -->
+                </div>
+            </div>
+            
+            <!-- 游戏控制栏 -->
+            <div class="flex justify-between p-4 tech-ui">
+                <button class="tech-button px-4 py-2 rounded-lg" onclick="showMenu()">
+                    <i class="fas fa-bars mr-2"></i>菜单
+                </button>
+                <button class="tech-button px-4 py-2 rounded-lg" onclick="usePowerup()">
+                    <i class="fas fa-bolt mr-2"></i>技能
+                </button>
+                <button class="tech-button px-4 py-2 rounded-lg bg-purple-500" onclick="showChat()">
+                    <i class="fas fa-comments mr-2"></i>聊天
+                </button>
+            </div>
+        </div>
+        
+        <!-- 房间菜单 -->
+        <div id="menu-screen" class="h-full flex flex-col hidden tech-ui p-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl text-cyan-300">游戏菜单</h2>
+                <button class="tech-button w-10 h-10 rounded-full" onclick="hideMenu()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-lg mb-2">房间信息</h3>
+                <div class="p-4 bg-gray-800 rounded-lg">
+                    <div class="flex justify-between mb-2">
+                        <span>房间代码:</span>
+                        <span class="room-code font-mono">BLK42</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span>游戏模式:</span>
+                        <span>限时对战</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>玩家数量:</span>
+                        <span>4/6</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-lg mb-2">游戏设置</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span>音效</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <span>音乐</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <span>震动反馈</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-lg mb-2">语言设置</h3>
+                <select class="w-full p-2 bg-gray-800 border border-cyan-500 rounded-lg">
+                    <option value="en">English</option>
+                    <option value="zh" selected>中文</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                </select>
+            </div>
+            
+            <button class="tech-button w-full py-3 rounded-lg bg-red-500 mt-auto" onclick="leaveRoom()">
+                <i class="fas fa-sign-out-alt mr-2"></i>离开房间
+            </button>
+        </div>
+        
+        <!-- 聊天界面 -->
+        <div id="chat-screen" class="h-full flex flex-col hidden tech-ui">
+            <div class="flex justify-between items-center p-4 border-b border-cyan-500">
+                <h2 class="text-xl text-cyan-300">房间聊天</h2>
+                <button class="tech-button w-10 h-10 rounded-full" onclick="hideChat()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-4 space-y-3">
+                <div class="flex">
+                    <div class="w-8 h-8 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center mr-2">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-400">玩家1 - 刚刚</div>
+                        <div class="bg-gray-800 p-2 rounded-lg inline-block">大家加油！</div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end">
+                    <div class="text-right">
+                        <div class="text-xs text-gray-400">你 - 刚刚</div>
+                        <div class="bg-cyan-600 p-2 rounded-lg inline-block">我要拿第一！</div>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-green-500 flex-shrink-0 flex items-center justify-center ml-2">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-cyan-500">
+                <div class="flex">
+                    <input type="text" class="flex-1 p-2 bg-gray-800 border border-cyan-500 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-cyan-300" placeholder="输入消息...">
+                    <button class="tech-button px-4 rounded-r-lg">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 游戏状态
+        let gameState = {
+            score: 2450,
+            timeLeft: 90, // 秒
+            combo: 0,
+            players: [
+                { id: 1, name: "玩家1", score: 2450, isCurrent: true },
+                { id: 2, name: "玩家2", score: 1980 },
+                { id: 3, name: "玩家3", score: 1750 },
+                { id: 4, name: "玩家4", score: 1320 }
+            ]
+        };
+        
+        // 方块点击效果
+        function blockClick(block, color) {
+            // 添加爆炸效果
+            block.classList.add("block-explode");
+            
+            // 更新分数
+            gameState.score += 100 + (gameState.combo * 50);
+            updateScore();
+            
+            // 连击计数
+            gameState.combo++;
+            if (gameState.combo > 1) {
+                showCombo(gameState.combo);
+            }
+            
+            // 移除方块（实际游戏中会替换新方块）
+            setTimeout(() => {
+                block.remove();
+            }, 500);
+            
+            // 震动反馈
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
+            // 更新排行榜
+            updateLeaderboard();
+        }
+        
+        // 显示连击效果
+        function showCombo(count) {
+            const comboDisplay = document.getElementById("combo-display");
+            comboDisplay.textContent = `COMBO x${count}!`;
+            comboDisplay.style.opacity = "1";
+            
+            setTimeout(() => {
+                comboDisplay.style.opacity = "0";
+                comboDisplay.style.transition = "opacity 0.5s";
+            }, 1000);
+        }
+        
+        // 更新分数显示
+        function updateScore() {
+            document.querySelector(".text-xl.text-green-300").textContent = gameState.score.toLocaleString();
+        }
+        
+        // 更新排行榜
+        function updateLeaderboard() {
+            // 排序玩家
+            gameState.players.sort((a, b) => b.score - a.score);
+            
+            // 更新DOM
+            const leaderboard = document.querySelector(".space-y-2");
+            leaderboard.innerHTML = "";
+            
+            gameState.players.forEach((player, index) => {
+                const playerCard = document.createElement("div");
+                playerCard.className = `player-card flex justify-between items-center p-2 ${player.isCurrent ? "current" : ""} ${index === 0 ? "winning" : ""}`;
+                playerCard.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="${index === 0 ? "text-yellow-300" : "text-gray-400"} mr-2">${index + 1}</span>
+                        <div class="w-8 h-8 rounded-full ${index === 0 ? "bg-yellow-500" : player.isCurrent ? "bg-blue-500" : "bg-red-500"} flex items-center justify-center mr-2">
+                            ${index === 0 ? '<i class="fas fa-crown"></i>' : '<i class="fas fa-user"></i>'}
+                        </div>
+                        <span>${player.name}${player.isCurrent ? " (你)" : ""}</span>
+                    </div>
+                    <span class="text-green-300">${player.score.toLocaleString()}</span>
+                `;
+                
+                if (index === 0) {
+                    playerCard.classList.add("rank-pulse");
+                }
+                
+                leaderboard.appendChild(playerCard);
+            });
+        }
+        
+        // 显示/隐藏菜单
+        function showMenu() {
+            document.getElementById("game-screen").classList.add("hidden");
+            document.getElementById("menu-screen").classList.remove("hidden");
+        }
+        
+        function hideMenu() {
+            document.getElementById("menu-screen").classList.add("hidden");
+            document.getElementById("game-screen").classList.remove("hidden");
+        }
+        
+        // 显示/隐藏聊天
+        function showChat() {
+            document.getElementById("game-screen").classList.add("hidden");
+            document.getElementById("chat-screen").classList.remove("hidden");
+        }
+        
+        function hideChat() {
+            document.getElementById("chat-screen").classList.add("hidden");
+            document.getElementById("game-screen").classList.remove("hidden");
+        }
+        
+        // 使用道具
+        function usePowerup() {
+            alert("道具已使用！");
+        }
+        
+        // 离开房间
+        function leaveRoom() {
+            if (confirm("确定要离开当前游戏房间吗？")) {
+                alert("已离开房间");
+                // 实际应用中这里会跳转到大厅或主页
+            }
+        }
+        
+        // 初始化游戏
+        function initGame() {
+            updateLeaderboard();
+            
+            // 模拟游戏倒计时
+            setInterval(() => {
+                gameState.timeLeft--;
+                const minutes = Math.floor(gameState.timeLeft / 60);
+                const seconds = gameState.timeLeft % 60;
+                document.querySelector(".text-xl.text-yellow-300").textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (gameState.timeLeft <= 0) {
+                    // 游戏结束逻辑
+                }
+            }, 1000);
+            
+            // 模拟其他玩家得分变化
+            setInterval(() => {
+                gameState.players.forEach(player => {
+                    if (!player.isCurrent) {
+                        player.score += Math.floor(Math.random() * 100) + 50;
+                    }
+                });
+                updateLeaderboard();
+            }, 3000);
+        }
+        
+        // 启动游戏
+        window.onload = initGame;
+    </script>
+</body>
+</html>
