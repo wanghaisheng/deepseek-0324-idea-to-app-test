@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>心镜 - 阳明心学助手</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: '#1A202C',
+            accent: '#DD6B20',
+            light: '#F7FAFC',
+            secondary: '#2D3748',
+            glass: 'rgba(45, 55, 72, 0.7)'
+          },
+          backdropBlur: {
+            xs: '2px',
+          },
+          boxShadow: {
+            'glass': '0 4px 30px rgba(0, 0, 0, 0.3)',
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glass-morphism {
+        @apply bg-glass backdrop-blur-xs border border-white/10 shadow-glass;
+      }
+      .energy-ring {
+        background: conic-gradient(from 0deg, #DD6B20 0%, #F6AD55 70%, transparent 70%);
+      }
+    }
+  </style>
+</head>
+<body class="bg-dark text-light p-10 overflow-x-auto">
+  <div class="flex space-x-8 min-w-max">
+    <!-- 页面1：首页 - 能量环 -->
+    <div class="w-[375px] h-[812px] relative border-2 border-white/10 rounded-3xl overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-dark to-secondary"></div>
+      
+      <div class="relative z-10 p-6 h-full flex flex-col">
+        <h2 class="text-xl font-bold text-accent mb-8">心学能量环</h2>
+        
+        <div class="flex-1 flex items-center justify-center">
+          <div class="relative w-64 h-64">
+            <!-- 玻璃态背景 -->
+            <div class="absolute inset-0 glass-morphism rounded-full"></div>
+            
+            <!-- 能量环 -->
+            <div class="absolute inset-4 rounded-full energy-ring flex items-center justify-center">
+              <div class="w-3/4 h-3/4 bg-dark rounded-full flex items-center justify-center">
+                <span class="text-2xl font-bold">68%</span>
+              </div>
+            </div>
+            
+            <!-- 指标标签 -->
+            <div class="absolute -bottom-4 left-0 right-0 flex justify-around">
+              <div class="text-center">
+                <div class="w-3 h-3 bg-accent rounded-full mx-auto mb-1"></div>
+                <span class="text-xs">澄明值</span>
+              </div>
+              <div class="text-center">
+                <div class="w-3 h-3 bg-amber-400 rounded-full mx-auto mb-1"></div>
+                <span class="text-xs">躬行力</span>
+              </div>
+              <div class="text-center">
+                <div class="w-3 h-3 bg-emerald-400 rounded-full mx-auto mb-1"></div>
+                <span class="text-xs">良知度</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 底部导航 -->
+        <div class="glass-morphism rounded-xl p-3 flex justify-around">
+          <button class="p-2 rounded-lg hover:bg-white/5 transition">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </button>
+          <!-- 其他导航按钮... -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 页面2：暗示库 -->
+    <div class="w-[375px] h-[812px] relative border-2 border-white/10 rounded-3xl overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-dark to-secondary"></div>
+      
+      <div class="relative z-10 p-6 h-full flex flex-col">
+        <h2 class="text-xl font-bold text-accent mb-6">情境暗示库</h2>
+        
+        <!-- 搜索框 -->
+        <div class="glass-morphism rounded-xl px-4 py-3 mb-6 flex items-center">
+          <svg class="w-5 h-5 text-accent mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input type="text" placeholder="搜索场景..." class="bg-transparent flex-1 outline-none text-sm">
+        </div>
+        
+        <!-- 暗示卡片 -->
+        <div class="space-y-4 overflow-y-auto flex-1 pr-2">
+          <div class="glass-morphism rounded-xl p-4 transition-all hover:scale-[1.02]">
+            <div class="flex items-start">
+              <div class="bg-accent/20 p-2 rounded-lg mr-3">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="font-medium">争吵场景</h3>
+                <p class="text-accent text-sm mt-1">"且停三分，观人如己"</p>
+              </div>
+              <span class="text-xs text-white/50">高频使用</span>
+            </div>
+          </div>
+          <!-- 更多卡片... -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 页面3：冲突模拟器 -->
+    <div class="w-[375px] h-[812px] relative border-2 border-white/10 rounded-3xl overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-dark to-secondary"></div>
+      
+      <div class="relative z-10 p-6 h-full flex flex-col">
+        <h2 class="text-xl font-bold text-accent mb-6">冲突化解模拟</h2>
+        
+        <!-- VR预览 -->
+        <div class="glass-morphism rounded-2xl overflow-hidden mb-6">
+          <img src="https://source.unsplash.com/random/600x600/?vr-headset" alt="VR模拟" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-medium mb-2">上司指责场景</h3>
+            <div class="flex items-center text-sm">
+              <span class="bg-accent/20 text-accent px-2 py-1 rounded mr-2">训练中</span>
+              <span class="text-white/60">完成度 42%</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 反馈仪表 -->
+        <div class="glass-morphism rounded-xl p-6 flex flex-col items-center">
+          <div class="relative w-32 h-32 mb-4">
+            <svg class="w-full h-full" viewBox="0 0 36 36">
+              <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                fill="none" stroke="#2D3748" stroke-width="3"/>
+              <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                fill="none" stroke="#DD6B20" stroke-width="3" stroke-dasharray="60, 100" stroke-linecap="round">
+                <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="3s" repeatCount="indefinite"/>
+              </path>
+            </svg>
+            <span class="absolute inset-0 flex items-center justify-center text-xl font-bold">58%</span>
+          </div>
+          <p class="text-center text-sm text-white/80">良知偏离度分析中</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 页面4：共修社区 -->
+    <div class="w-[375px] h-[812px] relative border-2 border-white/10 rounded-3xl overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-dark to-secondary"></div>
+      
+      <div class="relative z-10 p-6 h-full flex flex-col">
+        <h2 class="text-xl font-bold text-accent mb-6">千圣同心</h2>
+        
+        <!-- 用户卡片 -->
+        <div class="glass-morphism rounded-xl p-4 mb-6 transition-all hover:scale-[1.01]">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center mr-3">
+              <span class="text-accent font-bold">龙</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-medium">龙场悟道1997</h3>
+              <p class="text-sm text-white/60">遇到客户无理指责时...</p>
+            </div>
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+        
+        <!-- 热力图 -->
+        <div class="glass-morphism rounded-xl p-4 flex-1">
+          <h3 class="font-medium mb-4">共修能量场</h3>
+          <div class="relative h-48">
+            <div class="absolute bottom-0 left-0 right-0 h-px bg-white/10"></div>
+            <div class="absolute left-0 right-0 flex h-full items-end space-x-1">
+              <div class="flex-1 bg-accent/50 hover:bg-accent transition-all h-1/4 rounded-t-sm"></div>
+              <div class="flex-1 bg-accent/70 hover:bg-accent transition-all h-1/2 rounded-t-sm"></div>
+              <div class="flex-1 bg-accent hover:bg-accent transition-all h-3/4 rounded-t-sm"></div>
+              <!-- 更多柱状条... -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 页面5：心流日记 -->
+    <div class="w-[375px] h-[812px] relative border-2 border-white/10 rounded-3xl overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-dark to-secondary"></div>
+      
+      <div class="relative z-10 p-6 h-full flex flex-col">
+        <h2 class="text-xl font-bold text-accent mb-6">心流日记</h2>
+        
+        <!-- 选项卡 -->
+        <div class="glass-morphism rounded-full p-1 mb-6">
+          <div class="flex">
+            <button class="flex-1 py-2 px-4 rounded-full bg-accent text-dark text-sm font-medium">表层</button>
+            <button class="flex-1 py-2 px-4 rounded-full text-sm">中层</button>
+            <button class="flex-1 py-2 px-4 rounded-full text-sm">深层</button>
+          </div>
+        </div>
+        
+        <!-- 录音波形 -->
+        <div class="glass-morphism rounded-xl p-6 mb-6">
+          <div class="flex items-center justify-center space-x-1 h-12">
+            <div class="w-1 bg-accent rounded-full h-4 animate-wave"></div>
+            <div class="w-1 bg-accent rounded-full h-8 animate-wave" style="animation-delay: 0.2s"></div>
+            <div class="w-1 bg-accent rounded-full h-6 animate-wave" style="animation-delay: 0.4s"></div>
+            <!-- 更多波形条... -->
+          </div>
+          <p class="text-center mt-4 text-sm text-white/60">点击开始记录今日磨练</p>
+        </div>
+        
+        <!-- NFT徽章 -->
+        <div class="glass-morphism rounded-xl p-6 flex-1 flex flex-col items-center justify-center">
+          <div class="w-32 h-32 rounded-xl bg-gradient-to-br from-accent to-amber-400 mb-4 flex items-center justify-center">
+            <span class="text-dark font-bold text-lg">心镜</span>
+          </div>
+          <p class="text-sm text-center text-white/80">今日修行已生成数字凭证</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 页面6：晨昏定省 -->
+    <div class="w-[375px] h-[812px] relative border-2 border-white/10 rounded-3xl overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-dark to-secondary"></div>
+      
+      <div class="relative z-10 p-6 h-full flex flex-col">
+        <h2 class="text-xl font-bold text-accent mb-6">晨昏定省</h2>
+        
+        <!-- 时间轴 -->
+        <div class="glass-morphism rounded-xl p-6 mb-6">
+          <div class="relative h-2 bg-white/10 rounded-full mb-8">
+            <div class="absolute left-0 top-0 h-full rounded-full bg-accent w-1/3"></div>
+            <div class="absolute -top-1 left-1/4 w-4 h-4 rounded-full bg-accent border-4 border-dark"></div>
+          </div>
+          
+          <div class="flex justify-between text-sm">
+            <div class="text-center">
+              <p class="font-medium">卯时</p>
+              <p class="text-white/60">5:00-7:00</p>
+            </div>
+            <div class="text-center">
+              <p class="text-white/60">酉时</p>
+              <p class="text-white/60">17:00-19:00</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 设置项 -->
+        <div class="space-y-4 flex-1">
+          <div class="glass-morphism rounded-xl p-4 flex justify-between items-center">
+            <div>
+              <h3 class="font-medium">晨间提醒</h3>
+              <p class="text-sm text-white/60">推送当日心学主题</p>
+            </div>
+            <div class="w-12 h-6 rounded-full bg-accent p-1">
+              <div class="w-4 h-4 rounded-full bg-dark ml-auto"></div>
+            </div>
+          </div>
+          
+          <div class="glass-morphism rounded-xl p-4">
+            <h3 class="font-medium mb-2">明日心镜</h3>
+            <p class="text-accent text-sm">"减得一分人欲，复得一分天理"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 波形动画样式 -->
+  <style>
+    @keyframes wave {
+      0%, 100% { height: 4px; }
+      50% { height: 20px; }
+    }
+    .animate-wave {
+      animation: wave 1.5s ease-in-out infinite;
+    }
+  </style>
+</body>
+</html>
