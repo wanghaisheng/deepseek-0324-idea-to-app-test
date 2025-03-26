@@ -3,78 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>心镜 - 阳明心学心理暗示实践助手</title>
+  <title>心镜 - 阳明心学实践助手</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap');
     
-    :root {
-      --ink-100: #1A2A3A;
-      --ink-80: #3D4D5D;
-      --ink-60: #6D7B88;
-      --ink-40: #9CA8B3;
-      --ink-20: #CBD3D9;
-      --ink-10: #E5E9EC;
-      --ink-5: #F2F4F6;
-      --moon-white: #F8F9FA;
-      --vermilion: #E74C3C;
-    }
-    
     body {
-      font-family: 'Noto Serif SC', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--moon-white);
-      color: var(--ink-80);
+      font-family: 'Noto Serif SC', serif;
+      background-color: #f5f5f5;
     }
     
-    .calligraphy-text {
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    
-    .mirror-surface {
-      background: linear-gradient(135deg, #F2F4F6 0%, #E5E9EC 100%);
-      box-shadow: inset 0 4px 12px rgba(0,0,0,0.05);
+    .phone-mockup {
+      width: 375px;
+      height: 812px;
+      margin: 0 auto;
       position: relative;
       overflow: hidden;
-    }
-    
-    .mirror-surface::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8) 0%, transparent 70%);
-    }
-    
-    .active-scale:active {
-      transform: scale(0.96);
-    }
-    
-    .ink-stroke {
-      background: linear-gradient(to right, var(--ink-100), var(--ink-60));
-      height: 2px;
-      width: 40px;
-      margin: 8px 0;
-    }
-    
-    .safe-area {
-      padding-bottom: env(safe-area-inset-bottom);
+      border-radius: 40px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      background-color: #fff;
     }
     
     .page {
-      min-height: 100vh;
-      padding-bottom: 72px;
+      height: calc(100% - 80px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: env(safe-area-inset-bottom);
     }
     
     .hidden {
       display: none;
     }
     
-    .fade-in {
-      animation: fadeIn 0.3s ease-in-out;
+    .active-scale:active {
+      transform: scale(0.96);
+    }
+    
+    .ink-texture {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 Q30,10 40,20 T60,20 T80,20" fill="none" stroke="%23e5e5e5" stroke-width="1"/></svg>');
+      background-size: 200px;
+      opacity: 0.3;
+    }
+    
+    .brush-stroke {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><path d="M0,10 C20,15 40,5 60,10 S80,5 100,10" fill="none" stroke="%23000" stroke-width="2"/></svg>');
+      background-repeat: repeat-x;
+      background-position: bottom;
+      background-size: 100px 10px;
     }
     
     @keyframes fadeIn {
@@ -82,424 +58,463 @@
       to { opacity: 1; }
     }
     
-    /* 墨迹动画 */
-    @keyframes inkSpread {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    .fade-in {
+      animation: fadeIn 0.3s ease-out;
     }
     
-    .ink-animate {
-      animation: inkSpread 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    .scroll-hidden::-webkit-scrollbar {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <!-- 主容器 -->
-  <div class="max-w-md mx-auto relative overflow-hidden shadow-lg" style="height: 812px;">
-    <!-- 首页 -->
-    <div class="page bg-moon-white fade-in" id="home">
-      <header class="px-6 pt-12 pb-8">
-        <h1 class="text-xl font-medium calligraphy-text">今日心镜</h1>
-        <div class="ink-stroke"></div>
+  <div class="phone-mockup">
+    <!-- 主页面 -->
+    <div id="page-container" class="h-full">
+      <!-- 首页 -->
+      <div class="page" id="home">
+        <header class="p-6 pb-4">
+          <div class="flex justify-between items-center">
+            <h1 class="text-3xl font-bold">心镜</h1>
+            <button class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center active-scale">
+              <i class="fas fa-user"></i>
+            </button>
+          </div>
+          <p class="text-gray-500 mt-2">以心为镜，知行合一</p>
+        </header>
         
-        <div class="mt-6 flex items-center">
-          <div class="w-12 h-12 rounded-full bg-ink-10 flex items-center justify-center shadow-sm">
-            <i class="fas fa-brain text-ink-60"></i>
-          </div>
-          <div class="ml-4 flex-1">
-            <p class="text-sm text-ink-40">澄明值 · 78%</p>
-            <div class="mt-1 h-2 bg-ink-10 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full" style="width: 78%"></div>
+        <!-- 心学能量环 -->
+        <div class="mx-6 mb-6 p-6 bg-white rounded-2xl shadow-md relative overflow-hidden ink-texture">
+          <div class="relative z-10">
+            <h2 class="text-xl font-bold mb-4">心学能量环</h2>
+            <div class="flex justify-between mb-6">
+              <div class="text-center">
+                <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-2">
+                  <span class="text-red-500 font-bold text-xl">78</span>
+                </div>
+                <p class="text-xs text-gray-600">澄明值</p>
+              </div>
+              <div class="text-center">
+                <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-2">
+                  <span class="text-blue-500 font-bold text-xl">65</span>
+                </div>
+                <p class="text-xs text-gray-600">躬行力</p>
+              </div>
+              <div class="text-center">
+                <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-2">
+                  <span class="text-green-500 font-bold text-xl">82</span>
+                </div>
+                <p class="text-xs text-gray-600">良知度</p>
+              </div>
             </div>
-          </div>
-        </div>
-      </header>
-
-      <main class="px-6">
-        <!-- 动态心镜卡片 -->
-        <div class="mirror-card bg-white rounded-2xl shadow-sm p-6 mb-6 ink-animate">
-          <div class="mirror-surface w-full aspect-square rounded-xl flex items-center justify-center">
-            <p class="text-center text-ink-80 text-lg leading-relaxed calligraphy-text">"减得一分人欲<br>复得一分天理"</p>
-          </div>
-          <div class="mt-4 flex justify-between text-sm">
-            <button class="text-ink-40 active-scale flex items-center">
-              <i class="fas fa-book-open mr-1"></i> 典故
-            </button>
-            <button class="text-vermilion active-scale flex items-center">
-              <i class="fas fa-heart mr-1"></i> 收藏
+            <button class="w-full py-3 bg-black text-white rounded-lg font-medium active-scale">
+              今日修行建议
             </button>
           </div>
         </div>
-
-        <!-- 快速入口 -->
-        <div class="grid grid-cols-3 gap-3 mb-8">
-          <button onclick="navigateTo('workshop')" class="quick-action bg-blue-50 text-blue-600 rounded-lg py-3 active-scale">
-            <i class="fas fa-lightbulb block text-xl mb-1"></i>
-            <span class="text-xs">暗示工坊</span>
-          </button>
-          <button onclick="navigateTo('diary')" class="quick-action bg-green-50 text-green-600 rounded-lg py-3 active-scale">
-            <i class="fas fa-book block text-xl mb-1"></i>
-            <span class="text-xs">心流日记</span>
-          </button>
-          <button onclick="navigateTo('conflict')" class="quick-action bg-purple-50 text-purple-600 rounded-lg py-3 active-scale">
-            <i class="fas fa-balance-scale block text-xl mb-1"></i>
-            <span class="text-xs">冲突化解</span>
-          </button>
-        </div>
-
-        <!-- 今日任务 -->
-        <div class="bg-white rounded-2xl shadow-sm p-6 mb-6">
+        
+        <!-- 情境暗示 -->
+        <div class="mx-6 mb-6">
           <div class="flex justify-between items-center mb-4">
-            <h2 class="font-medium">今日修习</h2>
-            <span class="text-xs text-ink-40">3/5 完成</span>
+            <h2 class="text-xl font-bold">情境暗示</h2>
+            <button class="text-sm text-gray-500 active-scale">全部 ></button>
           </div>
           
-          <div class="space-y-3">
-            <div class="flex items-center">
-              <div class="w-6 h-6 rounded-full border border-green-400 flex items-center justify-center mr-3">
-                <i class="fas fa-check text-green-400 text-xs"></i>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded-xl shadow-sm active-scale">
+              <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center mb-3">
+                <i class="fas fa-briefcase text-yellow-500"></i>
               </div>
-              <p class="text-sm flex-1">晨间定省</p>
+              <h3 class="font-medium mb-1">职场</h3>
+              <p class="text-xs text-gray-500">5条暗示语</p>
             </div>
-            <div class="flex items-center">
-              <div class="w-6 h-6 rounded-full border border-green-400 flex items-center justify-center mr-3">
-                <i class="fas fa-check text-green-400 text-xs"></i>
+            <div class="bg-white p-4 rounded-xl shadow-sm active-scale">
+              <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-3">
+                <i class="fas fa-home text-purple-500"></i>
               </div>
-              <p class="text-sm flex-1">事上磨练</p>
+              <h3 class="font-medium mb-1">家庭</h3>
+              <p class="text-xs text-gray-500">3条暗示语</p>
             </div>
-            <div class="flex items-center">
-              <div class="w-6 h-6 rounded-full border border-green-400 flex items-center justify-center mr-3">
-                <i class="fas fa-check text-green-400 text-xs"></i>
+            <div class="bg-white p-4 rounded-xl shadow-sm active-scale">
+              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
+                <i class="fas fa-users text-blue-500"></i>
               </div>
-              <p class="text-sm flex-1">午时静坐</p>
+              <h3 class="font-medium mb-1">社交</h3>
+              <p class="text-xs text-gray-500">7条暗示语</p>
             </div>
-            <div class="flex items-center">
-              <div class="w-6 h-6 rounded-full border border-ink-20 flex items-center justify-center mr-3">
-                <i class="fas fa-ellipsis-h text-ink-40 text-xs"></i>
+            <div class="bg-white p-4 rounded-xl shadow-sm active-scale">
+              <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-3">
+                <i class="fas fa-heart text-green-500"></i>
               </div>
-              <p class="text-sm flex-1">晚间复盘</p>
-            </div>
-            <div class="flex items-center">
-              <div class="w-6 h-6 rounded-full border border-ink-20 flex items-center justify-center mr-3">
-                <i class="fas fa-ellipsis-h text-ink-40 text-xs"></i>
-              </div>
-              <p class="text-sm flex-1">良知日记</p>
+              <h3 class="font-medium mb-1">情绪</h3>
+              <p class="text-xs text-gray-500">4条暗示语</p>
             </div>
           </div>
-        </div>
-      </main>
-    </div>
-
-    <!-- 暗示工坊页 -->
-    <div class="page bg-moon-white hidden" id="workshop">
-      <header class="px-6 pt-6 pb-4 sticky top-0 bg-moon-white z-10 shadow-sm">
-        <div class="flex justify-between items-center">
-          <button onclick="navigateBack()" class="w-8 h-8 flex items-center justify-center active-scale">
-            <i class="fas fa-arrow-left text-ink-60"></i>
-          </button>
-          <h1 class="text-lg font-medium calligraphy-text">暗示工坊</h1>
-          <div class="w-8"></div>
         </div>
         
-        <div class="mt-4 relative">
-          <input type="text" placeholder="输入当前情境..." 
-            class="w-full bg-ink-5 rounded-full py-3 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
-          <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-ink-40">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </header>
-
-      <main class="px-6 pb-6">
-        <div class="mt-4">
-          <h3 class="text-sm font-medium text-ink-60 mb-2">推荐情境</h3>
-          <div class="flex flex-wrap gap-2">
-            <button class="px-3 py-1 bg-ink-5 rounded-full text-sm active-scale">情绪波动</button>
-            <button class="px-3 py-1 bg-ink-5 rounded-full text-sm active-scale">决策困难</button>
-            <button class="px-3 py-1 bg-ink-5 rounded-full text-sm active-scale">人际冲突</button>
-            <button class="px-3 py-1 bg-ink-5 rounded-full text-sm active-scale">拖延懈怠</button>
-            <button class="px-3 py-1 bg-ink-5 rounded-full text-sm active-scale">自我怀疑</button>
-          </div>
-        </div>
-
-        <div class="mt-6">
-          <h3 class="text-sm font-medium text-ink-60 mb-2">阳明语法模板</h3>
-          <div class="bg-white rounded-xl shadow-sm p-4 mb-4">
-            <p class="text-sm text-ink-80 mb-2">当____时（场景），须知____（心即理），故应____（知行合一）</p>
-            <button class="text-blue-500 text-sm active-scale">使用此模板</button>
-          </div>
-        </div>
-
-        <div class="mt-6">
-          <h3 class="text-sm font-medium text-ink-60 mb-2">我的暗示语</h3>
-          <div class="space-y-3">
-            <div class="bg-white rounded-xl shadow-sm p-4">
-              <p class="text-ink-80 mb-2">"当心生烦躁时，观照本心，如月映水，自然澄明"</p>
-              <div class="flex justify-between text-xs text-ink-40">
-                <span>使用12次</span>
-                <div>
-                  <button class="active-scale mr-2"><i class="fas fa-pencil-alt"></i></button>
-                  <button class="active-scale"><i class="fas fa-trash-alt"></i></button>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-4">
-              <p class="text-ink-80 mb-2">"遇事不顺，反求诸己，方见功夫"</p>
-              <div class="flex justify-between text-xs text-ink-40">
-                <span>使用8次</span>
-                <div>
-                  <button class="active-scale mr-2"><i class="fas fa-pencil-alt"></i></button>
-                  <button class="active-scale"><i class="fas fa-trash-alt"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button class="fixed bottom-24 right-6 w-14 h-14 bg-vermilion text-white rounded-full shadow-lg flex items-center justify-center active-scale">
-          <i class="fas fa-plus text-xl"></i>
-        </button>
-      </main>
-    </div>
-
-    <!-- 心流日记页 -->
-    <div class="page bg-moon-white hidden" id="diary">
-      <header class="px-6 pt-6 pb-4 sticky top-0 bg-moon-white z-10 shadow-sm">
-        <div class="flex justify-between items-center">
-          <button onclick="navigateBack()" class="w-8 h-8 flex items-center justify-center active-scale">
-            <i class="fas fa-arrow-left text-ink-60"></i>
-          </button>
-          <h1 class="text-lg font-medium calligraphy-text">心流日记</h1>
-          <button class="w-8 h-8 flex items-center justify-center active-scale">
-            <i class="fas fa-calendar-alt text-ink-60"></i>
-          </button>
-        </div>
-      </header>
-
-      <main class="px-6 pb-6">
-        <div class="mt-4 flex justify-center">
-          <div class="bg-white rounded-full shadow-sm px-4 py-1 inline-flex items-center">
-            <i class="fas fa-layer-group text-blue-500 mr-2"></i>
-            <span class="text-sm">三重记录体系</span>
-          </div>
-        </div>
-
-        <div class="mt-6">
-          <!-- 日记卡片 -->
-          <div class="bg-white rounded-2xl shadow-sm overflow-hidden mb-6">
-            <div class="p-4 border-b border-ink-10">
+        <!-- 今日心镜 -->
+        <div class="mx-6 mb-6">
+          <h2 class="text-xl font-bold mb-4">今日心镜</h2>
+          <div class="bg-black text-white p-6 rounded-2xl relative overflow-hidden brush-stroke">
+            <div class="relative z-10">
+              <p class="text-lg mb-4">"减得一分人欲，复得一分天理"</p>
               <div class="flex justify-between items-center">
-                <h3 class="font-medium">2023年11月15日</h3>
-                <span class="text-xs text-ink-40">卯时 · 晴</span>
+                <span class="text-sm opacity-80">—— 王阳明《传习录》</span>
+                <button class="text-sm bg-white bg-opacity-20 px-3 py-1 rounded-full active-scale">
+                  <i class="fas fa-share-alt mr-1"></i> 分享
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 快速记录 -->
+        <div class="mx-6 mb-6">
+          <h2 class="text-xl font-bold mb-4">快速记录</h2>
+          <div class="bg-white p-4 rounded-xl shadow-sm">
+            <div class="flex space-x-3">
+              <button class="flex-1 py-3 bg-gray-100 rounded-lg flex items-center justify-center active-scale">
+                <i class="fas fa-microphone text-gray-500 mr-2"></i>
+                <span>语音</span>
+              </button>
+              <button class="flex-1 py-3 bg-gray-100 rounded-lg flex items-center justify-center active-scale">
+                <i class="fas fa-pen text-gray-500 mr-2"></i>
+                <span>笔记</span>
+              </button>
+              <button class="flex-1 py-3 bg-gray-100 rounded-lg flex items-center justify-center active-scale">
+                <i class="fas fa-camera text-gray-500 mr-2"></i>
+                <span>拍照</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 暗示语详情页 -->
+      <div class="page hidden scroll-hidden" id="reminder-detail">
+        <header class="sticky top-0 bg-white z-10 p-6 pb-4 shadow-sm">
+          <div class="flex items-center">
+            <button onclick="navigateTo('home')" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-3 active-scale">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1 class="text-xl font-bold">暗示语详情</h1>
+          </div>
+        </header>
+        
+        <div class="p-6">
+          <div class="bg-yellow-50 p-6 rounded-2xl mb-6">
+            <p class="text-lg font-medium mb-4">"当遭遇批评时，须知此心本无善恶，故应反观自照，有则改之无则加勉"</p>
+            <div class="flex items-center text-sm text-gray-600">
+              <span class="bg-yellow-100 px-2 py-1 rounded mr-2">职场</span>
+              <span>使用次数: 12次</span>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h2 class="text-lg font-bold mb-3">心学解析</h2>
+            <div class="bg-white p-4 rounded-xl shadow-sm">
+              <p class="text-gray-700 mb-3">此暗示语融合阳明先生"心即理"思想，指出外界的评价不应直接引发情绪反应，而应回归本心进行观照。</p>
+              <p class="text-gray-700">"知行合一"体现在将批评转化为自我完善的行动，"致良知"则体现在保持客观中正的自我审视态度。</p>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h2 class="text-lg font-bold mb-3">应用记录</h2>
+            <div class="space-y-3">
+              <div class="bg-white p-4 rounded-xl shadow-sm">
+                <div class="flex justify-between items-start mb-2">
+                  <p class="font-medium">2023-06-15 09:30</p>
+                  <div class="flex">
+                    <i class="fas fa-star text-yellow-400 ml-1"></i>
+                    <i class="fas fa-star text-yellow-400 ml-1"></i>
+                    <i class="fas fa-star text-yellow-400 ml-1"></i>
+                    <i class="fas fa-star text-yellow-400 ml-1"></i>
+                    <i class="fas fa-star text-gray-300 ml-1"></i>
+                  </div>
+                </div>
+                <p class="text-gray-600 text-sm">经理指出报告错误，应用此语后冷静修改，避免了情绪对抗</p>
+              </div>
+              <div class="bg-white p-4 rounded-xl shadow-sm">
+                <div class="flex justify-between items-start mb-2">
+                  <p class="font-medium">2023-06-10 14:15</p>
+                  <div class="flex">
+                    <i class="fas fa-star text-yellow-400 ml-1"></i>
+                    <i class="fas fa-star text-yellow-400 ml-1"></i>
+                    <i class="fas fa-star text-yellow-400 ml-1"></i>
+                    <i class="fas fa-star text-gray-300 ml-1"></i>
+                    <i class="fas fa-star text-gray-300 ml-1"></i>
+                  </div>
+                </div>
+                <p class="text-gray-600 text-sm">同事质疑方案时稍有抵触，但很快调整心态</p>
+              </div>
+            </div>
+          </div>
+          
+          <button class="w-full py-4 bg-black text-white rounded-xl font-bold text-lg mt-4 active-scale">
+            <i class="fas fa-plus-circle mr-2"></i> 添加应用记录
+          </button>
+        </div>
+      </div>
+      
+      <!-- 心流日记页 -->
+      <div class="page hidden" id="diary">
+        <header class="sticky top-0 bg-white z-10 p-6 pb-4 shadow-sm">
+          <div class="flex items-center">
+            <button onclick="navigateTo('home')" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-3 active-scale">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1 class="text-xl font-bold">心流日记</h1>
+          </div>
+        </header>
+        
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold">2023年6月</h2>
+            <button class="text-sm bg-black text-white px-3 py-1 rounded-full active-scale">
+              <i class="fas fa-plus mr-1"></i> 新建
+            </button>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="bg-white p-5 rounded-2xl shadow-md active-scale">
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="font-bold">2023-06-16</h3>
+                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">已复盘</span>
+              </div>
+              <p class="text-gray-700 mb-3 line-clamp-2">今日会议中应用"观人如己"暗示语，成功化解与市场部的分歧。会后主动与对方沟通，达成共识...</p>
+              <div class="flex justify-between text-sm text-gray-500">
+                <span><i class="fas fa-tag mr-1"></i> 职场</span>
+                <span><i class="fas fa-clock mr-1"></i> 酉时</span>
               </div>
             </div>
             
-            <div class="p-4">
-              <div class="mb-4">
-                <h4 class="text-sm font-medium text-ink-60 mb-2 flex items-center">
-                  <i class="fas fa-microphone text-blue-500 mr-2"></i>
-                  表层记录
-                </h4>
-                <p class="text-sm text-ink-80">今日与同事就项目方案产生分歧，双方各执己见，会议不欢而散。</p>
+            <div class="bg-white p-5 rounded-2xl shadow-md active-scale">
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="font-bold">2023-06-15</h3>
+                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">待复盘</span>
               </div>
-              
-              <div class="mb-4">
-                <h4 class="text-sm font-medium text-ink-60 mb-2 flex items-center">
-                  <i class="fas fa-lightbulb text-green-500 mr-2"></i>
-                  中层记录
-                </h4>
-                <div class="bg-ink-5 rounded-lg p-3">
-                  <p class="text-sm text-ink-80 mb-2">应用暗示："观人之短如己之过，见己之过如获至宝"</p>
-                  <div class="flex items-center">
-                    <div class="flex-1">
-                      <div class="h-2 bg-ink-10 rounded-full overflow-hidden">
-                        <div class="h-full bg-green-500 rounded-full" style="width: 65%"></div>
-                      </div>
-                    </div>
-                    <span class="text-xs text-ink-40 ml-2">效果65%</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div>
-                <h4 class="text-sm font-medium text-ink-60 mb-2 flex items-center">
-                  <i class="fas fa-pen-fancy text-purple-500 mr-2"></i>
-                  深层记录
-                </h4>
-                <div class="bg-ink-5 rounded-lg p-3">
-                  <p class="text-sm text-ink-80 italic">"细思今日争执，实因好胜心起。阳明先生云'胜人者力，自胜者强'，当以克己为要。明日当主动与同事和解，共商良策。"</p>
-                  <div class="mt-2 flex justify-end">
-                    <span class="text-xs text-ink-40">数字心镜 · 已存证</span>
-                  </div>
-                </div>
+              <p class="text-gray-700 mb-3 line-clamp-2">晨起默念"减人欲复天理"，克制了刷手机的冲动。但午间对下属语气不佳，需反思...</p>
+              <div class="flex justify-between text-sm text-gray-500">
+                <span><i class="fas fa-tag mr-1"></i> 修身</span>
+                <span><i class="fas fa-clock mr-1"></i> 卯时</span>
               </div>
             </div>
-          </div>
-          
-          <!-- 更多日记... -->
-        </div>
-
-        <button class="fixed bottom-24 right-6 w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg flex items-center justify-center active-scale">
-          <i class="fas fa-plus text-xl"></i>
-        </button>
-      </main>
-    </div>
-
-    <!-- 冲突化解页 -->
-    <div class="page bg-moon-white hidden" id="conflict">
-      <header class="px-6 pt-6 pb-4 sticky top-0 bg-moon-white z-10 shadow-sm">
-        <div class="flex justify-between items-center">
-          <button onclick="navigateBack()" class="w-8 h-8 flex items-center justify-center active-scale">
-            <i class="fas fa-arrow-left text-ink-60"></i>
-          </button>
-          <h1 class="text-lg font-medium calligraphy-text">冲突化解</h1>
-          <div class="w-8"></div>
-        </div>
-      </header>
-
-      <main class="px-6 pb-6">
-        <div class="mt-4">
-          <h3 class="text-sm font-medium text-ink-60 mb-2">选择训练场景</h3>
-          <div class="grid grid-cols-2 gap-3">
-            <button class="bg-white rounded-xl shadow-sm p-4 active-scale">
-              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-2">
-                <i class="fas fa-briefcase text-blue-500"></i>
+            
+            <div class="bg-white p-5 rounded-2xl shadow-md active-scale">
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="font-bold">2023-06-14</h3>
+                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">已存证</span>
               </div>
-              <p class="text-sm font-medium">职场冲突</p>
-            </button>
-            <button class="bg-white rounded-xl shadow-sm p-4 active-scale">
-              <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-2">
-                <i class="fas fa-home text-green-500"></i>
-              </div>
-              <p class="text-sm font-medium">家庭矛盾</p>
-            </button>
-            <button class="bg-white rounded-xl shadow-sm p-4 active-scale">
-              <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-2">
-                <i class="fas fa-user-friends text-purple-500"></i>
-              </div>
-              <p class="text-sm font-medium">社交困境</p>
-            </button>
-            <button class="bg-white rounded-xl shadow-sm p-4 active-scale">
-              <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center mb-2">
-                <i class="fas fa-user-shield text-yellow-500"></i>
-              </div>
-              <p class="text-sm font-medium">自我矛盾</p>
-            </button>
-          </div>
-        </div>
-
-        <div class="mt-6">
-          <h3 class="text-sm font-medium text-ink-60 mb-2">最近训练</h3>
-          <div class="bg-white rounded-xl shadow-sm p-4">
-            <div class="flex items-start">
-              <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mr-3">
-                <i class="fas fa-briefcase text-blue-500"></i>
-              </div>
-              <div class="flex-1">
-                <h4 class="font-medium">项目评审争议</h4>
-                <p class="text-sm text-ink-60 mt-1">与部门主管意见不合</p>
-                <div class="mt-2 flex items-center">
-                  <div class="flex-1">
-                    <div class="h-2 bg-ink-10 rounded-full overflow-hidden">
-                      <div class="h-full bg-purple-500 rounded-full" style="width: 82%"></div>
-                    </div>
-                  </div>
-                  <span class="text-xs text-ink-40 ml-2">良知度82%</span>
-                </div>
+              <p class="text-gray-700 mb-3 line-clamp-2">与父母通话时应用"孝悌是良知"暗示，耐心倾听不打断。记录为NFT数字心镜...</p>
+              <div class="flex justify-between text-sm text-gray-500">
+                <span><i class="fas fa-tag mr-1"></i> 家庭</span>
+                <span><i class="fas fa-lock mr-1"></i> 区块链</span>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="mt-6 bg-white rounded-xl shadow-sm p-4">
-          <h3 class="text-sm font-medium text-ink-60 mb-2">良知偏离报告</h3>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs">情绪控制</span>
-            <span class="text-xs font-medium text-green-500">良好</span>
+      </div>
+      
+      <!-- 共修社区页 -->
+      <div class="page hidden" id="community">
+        <header class="sticky top-0 bg-white z-10 p-6 pb-4 shadow-sm">
+          <div class="flex items-center">
+            <button onclick="navigateTo('home')" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-3 active-scale">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1 class="text-xl font-bold">千圣同心</h1>
           </div>
-          <div class="h-1 bg-ink-10 rounded-full overflow-hidden mb-3">
-            <div class="h-full bg-green-500 rounded-full" style="width: 85%"></div>
+        </header>
+        
+        <div class="p-6">
+          <div class="bg-purple-50 p-5 rounded-2xl mb-6">
+            <h2 class="font-bold text-lg mb-2">《当代传习录》精选</h2>
+            <p class="text-gray-700 mb-3">"当团队意见不合时，我观想阳明先生'万物一体'之训，先肯定对方合理处，再陈述己见，终得共识"</p>
+            <div class="flex justify-between text-sm text-gray-600">
+              <span>用户「龙场悟道1997」</span>
+              <span>126赞</span>
+            </div>
           </div>
           
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs">同理心</span>
-            <span class="text-xs font-medium text-yellow-500">尚可</span>
-          </div>
-          <div class="h-1 bg-ink-10 rounded-full overflow-hidden mb-3">
-            <div class="h-full bg-yellow-500 rounded-full" style="width: 65%"></div>
-          </div>
+          <h2 class="text-xl font-bold mb-4">最新求助</h2>
           
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs">自我觉察</span>
-            <span class="text-xs font-medium text-green-500">优秀</span>
-          </div>
-          <div class="h-1 bg-ink-10 rounded-full overflow-hidden">
-            <div class="h-full bg-green-500 rounded-full" style="width: 92%"></div>
+          <div class="space-y-4">
+            <div class="bg-white p-5 rounded-2xl shadow-md">
+              <div class="flex items-start mb-3">
+                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3 shrink-0">
+                  <span class="text-blue-800 font-bold">知</span>
+                </div>
+                <div>
+                  <h3 class="font-bold">如何应对职场捧杀？</h3>
+                  <p class="text-sm text-gray-500">用户「心即理2023」 2小时前</p>
+                </div>
+              </div>
+              <p class="text-gray-700 mb-4">领导当众过度表扬，实则架空实权，心中郁结难解...</p>
+              <div class="flex justify-between text-sm">
+                <button class="text-gray-500 active-scale">
+                  <i class="far fa-comment mr-1"></i> 12条建议
+                </button>
+                <button class="text-purple-600 font-medium active-scale">
+                  投石相助 >
+                </button>
+              </div>
+            </div>
+            
+            <div class="bg-white p-5 rounded-2xl shadow-md">
+              <div class="flex items-start mb-3">
+                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3 shrink-0">
+                  <span class="text-green-800 font-bold">行</span>
+                </div>
+                <div>
+                  <h3 class="font-bold">明知熬夜不好却难改</h3>
+                  <p class="text-sm text-gray-500">用户「格物1988」 5小时前</p>
+                </div>
+              </div>
+              <p class="text-gray-700 mb-4">每日立志早睡，却总拖延至深夜，知行不能合一...</p>
+              <div class="flex justify-between text-sm">
+                <button class="text-gray-500 active-scale">
+                  <i class="far fa-comment mr-1"></i> 8条建议
+                </button>
+                <button class="text-purple-600 font-medium active-scale">
+                  投石相助 >
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </main>
+      </div>
+      
+      <!-- 个人中心页 -->
+      <div class="page hidden" id="profile">
+        <header class="sticky top-0 bg-white z-10 p-6 pb-4 shadow-sm">
+          <div class="flex items-center">
+            <button onclick="navigateTo('home')" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-3 active-scale">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1 class="text-xl font-bold">个人中心</h1>
+          </div>
+        </header>
+        
+        <div class="p-6">
+          <div class="flex items-center mb-8">
+            <div class="w-16 h-16 rounded-full bg-black flex items-center justify-center mr-4">
+              <span class="text-white text-2xl font-bold">心</span>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold">用户「致良知」</h2>
+              <p class="text-gray-500">修心第108天</p>
+            </div>
+          </div>
+          
+          <div class="space-y-4 mb-8">
+            <button class="w-full bg-white p-4 rounded-xl shadow-sm flex justify-between items-center active-scale">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center mr-3">
+                  <i class="fas fa-book text-red-500"></i>
+                </div>
+                <span class="font-medium">我的传习录</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </button>
+            
+            <button class="w-full bg-white p-4 rounded-xl shadow-sm flex justify-between items-center active-scale">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
+                  <i class="fas fa-robot text-blue-500"></i>
+                </div>
+                <span class="font-medium">冲突模拟训练</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </button>
+            
+            <button class="w-full bg-white p-4 rounded-xl shadow-sm flex justify-between items-center active-scale">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center mr-3">
+                  <i class="fas fa-bell text-yellow-500"></i>
+                </div>
+                <span class="font-medium">晨昏定省设置</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </button>
+          </div>
+          
+          <div class="bg-gray-100 p-4 rounded-xl">
+            <h3 class="font-bold mb-2">心学罗盘手环</h3>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-12 h-12 rounded-full bg-black flex items-center justify-center mr-3">
+                  <i class="fas fa-bluetooth text-white"></i>
+                </div>
+                <div>
+                  <p class="font-medium">已连接</p>
+                  <p class="text-xs text-gray-500">电量 78%</p>
+                </div>
+              </div>
+              <button class="text-sm bg-black text-white px-3 py-1 rounded-full active-scale">
+                设置
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
+    
     <!-- 底部导航 -->
-    <nav class="main-nav safe-area fixed bottom-0 left-0 right-0 bg-white border-t border-ink-10 flex justify-around py-2">
-      <button data-page="home" class="flex flex-col items-center py-2 px-4 active-scale text-blue-500">
-        <i class="fas fa-home text-lg"></i>
-        <span class="text-xs mt-1">心镜</span>
+    <nav class="absolute bottom-0 w-full bg-white border-t border-gray-200 safe-area flex justify-around py-3">
+      <button data-page="home" class="flex flex-col items-center active-scale">
+        <i class="fas fa-home text-xl mb-1"></i>
+        <span class="text-xs">首页</span>
       </button>
-      <button data-page="workshop" class="flex flex-col items-center py-2 px-4 active-scale text-ink-40">
-        <i class="fas fa-lightbulb text-lg"></i>
-        <span class="text-xs mt-1">工坊</span>
+      <button data-page="diary" class="flex flex-col items-center active-scale">
+        <i class="fas fa-book-open text-xl mb-1"></i>
+        <span class="text-xs">日记</span>
       </button>
-      <button data-page="diary" class="flex flex-col items-center py-2 px-4 active-scale text-ink-40">
-        <i class="fas fa-book text-lg"></i>
-        <span class="text-xs mt-1">日记</span>
+      <button data-page="community" class="flex flex-col items-center active-scale">
+        <i class="fas fa-users text-xl mb-1"></i>
+        <span class="text-xs">共修</span>
       </button>
-      <button data-page="conflict" class="flex flex-col items-center py-2 px-4 active-scale text-ink-40">
-        <i class="fas fa-balance-scale text-lg"></i>
-        <span class="text-xs mt-1">冲突</span>
+      <button data-page="profile" class="flex flex-col items-center active-scale">
+        <i class="fas fa-user text-xl mb-1"></i>
+        <span class="text-xs">我的</span>
       </button>
     </nav>
   </div>
 
   <script>
-    // 页面路由控制
+    // 当前页面
     let currentPage = 'home';
-    const pages = ['home', 'workshop', 'diary', 'conflict'];
     
+    // 页面切换函数
     function navigateTo(pageId) {
-      if (!pages.includes(pageId)) return;
-      
+      // 隐藏当前页面
       document.getElementById(currentPage).classList.add('hidden');
+      
+      // 显示目标页面
       document.getElementById(pageId).classList.remove('hidden');
       document.getElementById(pageId).classList.add('fade-in');
       
-      // 更新导航按钮状态
-      document.querySelectorAll('[data-page]').forEach(btn => {
-        if (btn.dataset.page === pageId) {
-          btn.classList.remove('text-ink-40');
-          btn.classList.add('text-blue-500');
-        } else {
-          btn.classList.remove('text-blue-500');
-          btn.classList.add('text-ink-40');
-        }
-      });
-      
+      // 更新当前页面
       currentPage = pageId;
+      
+      // 滚动到顶部
+      document.getElementById(pageId).scrollTo(0, 0);
     }
     
-    function navigateBack() {
-      if (currentPage === 'home') return;
-      navigateTo('home');
-    }
-    
-    // 初始化导航按钮点击事件
-    document.querySelectorAll('[data-page]').forEach(btn => {
-      btn.addEventListener('click', () => navigateTo(btn.dataset.page));
+    // 绑定导航按钮事件
+    document.querySelectorAll('[data-page]').forEach(button => {
+      button.addEventListener('click', () => {
+        navigateTo(button.dataset.page);
+      });
     });
     
-    // 模拟页面加载动画
-    window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('home').classList.add('fade-in');
+    // 模拟卡片点击事件
+    document.querySelectorAll('.active-scale').forEach(element => {
+      element.addEventListener('click', function() {
+        // 如果是暗示语卡片，跳转到详情页
+        if (this.classList.contains('bg-white') && this.querySelector('h3')) {
+          navigateTo('reminder-detail');
+        }
+      });
     });
   </script>
 </body>
