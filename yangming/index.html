@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心镜 - 阳明心学心理暗示实践助手</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* 自定义样式 */
+        @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap');
+        
+        :root {
+            --primary-dark: #1a365d;
+            --primary-light: #4299e1;
+            --accent-gold: #d4af37;
+            --accent-red: #c53030;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--text-primary);
+            background-color: #f7fafc;
+        }
+        
+        .title-font {
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+        
+        .phone-mockup {
+            width: 375px;
+            height: 812px;
+            border-radius: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            background-color: white;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .app-content {
+            height: calc(100% - 44px - 60px);
+            overflow-y: auto;
+        }
+        
+        .tab-bar {
+            height: 60px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 10px;
+        }
+        
+        .tab-item.active {
+            color: var(--primary-dark);
+        }
+        
+        .tab-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        
+        .energy-ring {
+            width: 180px;
+            height: 180px;
+            position: relative;
+            margin: 20px auto;
+        }
+        
+        .energy-circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .circle-1 {
+            width: 180px;
+            height: 180px;
+            border: 8px solid rgba(66, 153, 225, 0.2);
+        }
+        
+        .circle-2 {
+            width: 140px;
+            height: 140px;
+            border: 8px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .circle-3 {
+            width: 100px;
+            height: 100px;
+            border: 8px solid rgba(197, 48, 48, 0.2);
+            background: white;
+        }
+        
+        .scene-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .scene-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .scene-card-header {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
+            color: white;
+            padding: 12px;
+            font-weight: bold;
+        }
+        
+        .scene-card-body {
+            padding: 15px;
+        }
+        
+        .wisdom-quote {
+            font-style: italic;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--accent-gold);
+            padding-left: 10px;
+            margin: 10px 0;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ink-splash {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1600189261867-6e2a90f9cd6a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .journal-entry {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--accent-gold);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .community-post {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        /* 魔幻风格增强 */
+        .magic-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .magic-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                rgba(26, 54, 93, 0.3), 
+                rgba(66, 153, 225, 0.3), 
+                rgba(212, 175, 55, 0.3));
+            z-index: -1;
+            border-radius: 18px;
+            animation: animate 4s linear infinite;
+        }
+        
+        @keyframes animate {
+            0% { filter: blur(0px); opacity: 0.8; }
+            50% { filter: blur(2px); opacity: 0.5; }
+            100% { filter: blur(0px); opacity: 0.8; }
+        }
+        
+        .magic-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .magic-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right, 
+                rgba(255, 255, 255, 0.3), 
+                rgba(255, 255, 255, 0.1), 
+                transparent
+            );
+            transform: rotate(30deg);
+            transition: all 0.3s;
+        }
+        
+        .magic-btn:hover::after {
+            left: 100%;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .chinese-pattern {
+            background-image: url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span>9:41</span>
+            <div class="flex space-x-2">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-three-quarters"></i>
+            </div>
+        </div>
+        
+        <div class="app-content p-4 relative">
+            <div class="ink-splash"></div>
+            
+            <!-- 首页 -->
+            <div id="home" class="page active">
+                <h1 class="title-font text-2xl text-center mb-6 text-gray-800">心镜</h1>
+                
+                <div class="magic-card p-6 mb-6 floating-element">
+                    <h2 class="text-lg font-bold mb-2">今日心镜</h2>
+                    <p class="wisdom-quote">"知是行的主意，行是知的功夫；知是行之始，行是知之成。"</p>
+                    <p class="text-sm text-gray-600">—— 王阳明《传习录》</p>
+                </div>
+                
+                <div class="energy-ring mb-8 floating-element">
+                    <div class="energy-circle circle-1">
+                        <div class="energy-circle circle-2">
+                            <div class="energy-circle circle-3">
+                                <span class="text-xs text-gray-500">良知度</span>
+                                <span class="text-xl font-bold">78%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-around mb-6">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-brain text-blue-600"></i>
+                        </div>
+                        <span class="text-xs">澄明值</span>
+                        <div class="progress-bar mt-1 w-16 mx-auto">
+                            <div class="progress-fill bg-blue-600" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-walking text-yellow-600"></i>
+                        </div>
+                        <span class="text-xs">躬行力</span>
+                        <div class="progress-bar mt-1 w-16 mx-auto">
+                            <div class="progress-fill bg-yellow-600" style="width: 82%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-heart text-red-600"></i>
+                        </div>
+                        <span class="text-xs">良知度</span>
+                        <div class="progress-bar mt-1 w-16 mx-auto">
+                            <div class="progress-fill bg-red-600" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2 class="text-lg font-bold mb-3">快速情境</h2>
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <div class="scene-card magic-card">
+                        <div class="scene-card-header">
+                            <i class="fas fa-briefcase mr-2"></i>职场
+                        </div>
+                        <div class="scene-card-body">
+                            <p class="text-sm">面对工作压力与挑战</p>
+                        </div>
+                    </div>
+                    <div class="scene-card magic-card">
+                        <div class="scene-card-header bg-yellow-600">
+                            <i class="fas fa-home mr-2"></i>家庭
+                        </div>
+                        <div class="scene-card-body">
+                            <p class="text-sm">处理家人关系</p>
+                        </div>
+                    </div>
+                    <div class="scene-card magic-card">
+                        <div class="scene-card-header bg-green-600">
+                            <i class="fas fa-users mr-2"></i>社交
+                        </div>
+                        <div class="scene-card-body">
+                            <p class="text-sm">人际交往情境</p>
+                        </div>
+                    </div>
+                    <div class="scene-card magic-card">
+                        <div class="scene-card-header bg-purple-600">
+                            <i class="fas fa-user mr-2"></i>自我
+                        </div>
+                        <div class="scene-card-body">
+                            <p class="text-sm">内心修养与成长</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-primary magic-btn w-full py-3 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-plus mr-2"></i> 记录今日心镜
+                </button>
+            </div>
+            
+            <!-- 情境暗示页面 -->
+            <div id="scenes" class="page hidden">
+                <h1 class="title-font text-2xl text-center mb-6 text-gray-800">情境暗示</h1>
+                
+                <div class="magic-card p-4 mb-4">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-briefcase text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">职场情境</h3>
+                            <p class="text-xs text-gray-500">面对工作压力与挑战</p>
+                        </div>
+                    </div>
+                    
+                    <div class="wisdom-quote mb-3">
+                        "人须在事上磨练，做功夫，乃有益。若只好静，遇事便乱，终无长进。"
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button class="magic-btn bg-gray-100 px-3 py-1 rounded-full text-sm">
+                            <i class="fas fa-bookmark mr-1"></i> 收藏
+                        </button>
+                        <button class="magic-btn bg-blue-100 px-3 py-1 rounded-full text-sm text-blue-600">
+                            <i class="fas fa-share-alt mr-1"></i> 分享
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="magic-card p-4 mb-4">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-home text-yellow-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">家庭情境</h3>
+                            <p class="text-xs text-gray-500">处理家人关系</p>
+                        </div>
+                    </div>
+                    
+                    <div class="wisdom-quote mb-3">
+                        "爱亲敬长，良知也。无爱敬之心，即无良知矣。"
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button class="magic-btn bg-gray-100 px-3 py-1 rounded-full text-sm">
+                            <i class="fas fa-bookmark mr-1"></i> 收藏
+                        </button>
+                        <button class="magic-btn bg-blue-100 px-3 py-1 rounded-full text-sm text-blue-600">
+                            <i class="fas fa-share-alt mr-1"></i> 分享
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="magic-card p-4">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-users text-green-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">社交情境</h3>
+                            <p class="text-xs text-gray-500">人际交往情境</p>
+                        </div>
+                    </div>
+                    
+                    <div class="wisdom-quote mb-3">
+                        "以万物为一体者，其视天下犹一家，中国犹一人焉。"
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button class="magic-btn bg-gray-100 px-3 py-1 rounded-full text-sm">
+                            <i class="fas fa-bookmark mr-1"></i> 收藏
+                        </button>
+                        <button class="magic-btn bg-blue-100 px-3 py-1 rounded-full text-sm text-blue-600">
+                            <i class="fas fa-share-alt mr-1"></i> 分享
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 心流日记页面 -->
+            <div id="journal" class="page hidden">
+                <h1 class="title-font text-2xl text-center mb-6 text-gray-800">心流日记</h1>
+                
+                <div class="flex justify-around mb-6">
+                    <button class="magic-btn bg-blue-100 px-4 py-2 rounded-full text-blue-600 font-medium">
+                        <i class="fas fa-microphone mr-1"></i> 语音速记
+                    </button>
+                    <button class="magic-btn bg-yellow-100 px-4 py-2 rounded-full text-yellow-600 font-medium">
+                        <i class="fas fa-pen-fancy mr-1"></i> 手写感悟
+                    </button>
+                </div>
+                
+                <div class="journal-entry magic-card">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-bold">今日事件</h3>
+                        <span class="text-xs text-gray-500">2023-06-15</span>
+                    </div>
+                    <p class="text-sm mb-3">与同事就项目方向产生分歧，情绪有些激动。</p>
+                    <div class="wisdom-quote text-sm">
+                        "且停三分，观人如己" — 应用此暗示后暂停争论，尝试理解对方立场
+                    </div>
+                    <div class="flex items-center mt-3">
+                        <div class="progress-bar flex-1 mr-2">
+                            <div class="progress-fill bg-green-500" style="width: 75%"></div>
+                        </div>
+                        <span class="text-xs font-bold">7.5/10</span>
+                    </div>
+                </div>
+                
+                <div class="journal-entry magic-card">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-bold">良知感悟</h3>
+                        <span class="text-xs text-gray-500">2023-06-14</span>
+                    </div>
+                    <p class="text-sm">今日察觉自己对服务员态度不佳，反省后发现是工作压力导致迁怒他人。当知"心即理"，内心不平则外显无礼。</p>
+                    <div class="flex items-center justify-end mt-2">
+                        <button class="magic-btn bg-gray-100 px-2 py-1 rounded text-xs">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="journal-entry magic-card">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-bold">晨间定省</h3>
+                        <span class="text-xs text-gray-500">2023-06-14</span>
+                    </div>
+                    <p class="text-sm">今日心镜：减得一分人欲，复得一分天理。计划在会议中多倾听，少自我表现。</p>
+                    <div class="flex items-center justify-end mt-2">
+                        <button class="magic-btn bg-gray-100 px-2 py-1 rounded text-xs">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 共修社区页面 -->
+            <div id="community" class="page hidden">
+                <h1 class="title-font text-2xl text-center mb-6 text-gray-800">千圣同心</h1>
+                
+                <div class="flex mb-4">
+                    <input type="text" placeholder="写下你的困惑..." class="flex-1 border border-gray-200 rounded-l-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    <button class="magic-btn bg-blue-600 text-white px-4 py-2 rounded-r-full">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                
+                <div class="community-post magic-card">
+                    <div class="flex items-start mb-3">
+                        <div class="avatar mr-3">龙场</div>
+                        <div>
+                            <h3 class="font-bold">龙场悟道1997</h3>
+                            <p class="text-xs text-gray-500">2小时前</p>
+                        </div>
+                    </div>
+                    <p class="mb-3">最近总是容易对家人发脾气，事后又很后悔，该如何用"致良知"的方法改善？</p>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-blue-600">3个建议</span>
+                        <span class="text-gray-500">12次共鸣</span>
+                    </div>
+                </div>
+                
+                <div class="community-post magic-card">
+                    <div class="flex items-start mb-3">
+                        <div class="avatar mr-3 bg-yellow-500">知行</div>
+                        <div>
+                            <h3 class="font-bold">知行合一2023</h3>
+                            <p class="text-xs text-gray-500">5小时前</p>
+                        </div>
+                    </div>
+                    <p class="mb-3">分享今日实践：面对同事抢功，想起阳明先生"心外无物"，决定专注自身成长而非计较，心境顿时开阔。</p>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-blue-600">8个赞</span>
+                        <span class="text-gray-500">收录《当代传习录》</span>
+                    </div>
+                </div>
+                
+                <div class="community-post magic-card">
+                    <div class="flex items-start mb-3">
+                        <div class="avatar mr-3 bg-red-500">心即</div>
+                        <div>
+                            <h3 class="font-bold">心即理探索者</h3>
+                            <p class="text-xs text-gray-500">1天前</p>
+                        </div>
+                    </div>
+                    <p class="mb-3">"事上磨练"工作坊心得：将繁琐任务视为磨练心性的机会，工作效率反而提升。</p>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-blue-600">15个赞</span>
+                        <span class="text-gray-500">22次收藏</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 个人中心页面 -->
+            <div id="profile" class="page hidden">
+                <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-user text-blue-600 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-xl">阳明学徒</h2>
+                        <p class="text-sm text-gray-500">修心第108天</p>
+                    </div>
+                </div>
+                
+                <div class="magic-card p-4 mb-4">
+                    <h3 class="font-bold mb-3">我的能量</h3>
+                    <div class="flex items-center mb-2">
+                        <div class="w-20 text-sm">澄明值</div>
+                        <div class="progress-bar flex-1 mx-2">
+                            <div class="progress-fill bg-blue-600" style="width: 65%"></div>
+                        </div>
+                        <div class="w-10 text-right text-sm font-bold">65%</div>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <div class="w-20 text-sm">躬行力</div>
+                        <div class="progress-bar flex-1 mx-2">
+                            <div class="progress-fill bg-yellow-600" style="width: 82%"></div>
+                        </div>
+                        <div class="w-10 text-right text-sm font-bold">82%</div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-20 text-sm">良知度</div>
+                        <div class="progress-bar flex-1 mx-2">
+                            <div class="progress-fill bg-red-600" style="width: 78%"></div>
+                        </div>
+                        <div class="w-10 text-right text-sm font-bold">78%</div>
+                    </div>
+                </div>
+                
+                <div class="magic-card p-4 mb-4">
+                    <h3 class="font-bold mb-3">我的成就</h3>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="bg-blue-50 rounded-lg p-2 text-center">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                                <i class="fas fa-book text-blue-600"></i>
+                            </div>
+                            <span class="text-xs">传习者</span>
+                        </div>
+                        <div class="bg-yellow-50 rounded-lg p-2 text-center">
+                            <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                                <i class="fas fa-walking text-yellow-600"></i>
+                            </div>
+                            <span class="text-xs">行者</span>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-2 text-center">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                                <i class="fas fa-heart text-red-600"></i>
+                            </div>
+                            <span class="text-xs">明镜</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="magic-card p-4">
+                    <h3 class="font-bold mb-3">设置</h3>
+                    <div class="settings-item">
+                        <span>晨昏定省提醒</span>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    <div class="settings-item">
+                        <span>手环连接</span>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    <div class="settings-item">
+                        <span>暗示语偏好</span>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    <div class="settings-item border-none">
+                        <span>关于心镜</span>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-bar">
+            <div class="tab-item active" onclick="showPage('home')">
+                <i class="fas fa-home tab-icon"></i>
+                <span>首页</span>
+            </div>
+            <div class="tab-item" onclick="showPage('scenes')">
+                <i class="fas fa-lightbulb tab-icon"></i>
+                <span>情境</span>
+            </div>
+            <div class="tab-item" onclick="showPage('journal')">
+                <i class="fas fa-book tab-icon"></i>
+                <span>日记</span>
+            </div>
+            <div class="tab-item" onclick="showPage('community')">
+                <i class="fas fa-users tab-icon"></i>
+                <span>共修</span>
+            </div>
+            <div class="tab-item" onclick="showPage('profile')">
+                <i class="fas fa-user tab-icon"></i>
+                <span>我的</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showPage(pageId) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // 显示选中的页面
+            document.getElementById(pageId).classList.remove('hidden');
+            
+            // 更新标签栏活动状态
+            document.querySelectorAll('.tab-item').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            event.currentTarget.classList.add('active');
+        }
+        
+        // 添加简单动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.magic-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease ' + (index * 0.1) + 's';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
