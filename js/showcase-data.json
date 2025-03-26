@@ -1,0 +1,74 @@
+{
+  "simple": {
+    "title": "One Sentence",
+    "examples": [
+      {
+        "id": "dashboard",
+        "category": "dashboard,saas",
+        "model": "v3-0324",
+        "input": {
+          "type": "iframe",
+          "content": "https://designai-showcase.github.io/simple-dashboard-input",
+          "height": 120
+        },
+        "output": {
+          "type": "iframe",
+          "content": "https://designai-showcase.github.io/simple-dashboard",
+          "height": 300
+        }
+      },
+      {
+        "id": "fitness",
+        "category": "ecommerce,social",
+        "model": "r1",
+        "input": {
+          "type": "text",
+          "content": "\"Design a modern landing page for a fitness app\""
+        },
+        "output": {
+          "type": "iframe",
+          "content": "https://designai-showcase.github.io/simple-fitness",
+          "height": 300
+        }
+      }
+    ]
+  },
+  "medium": {
+    "title": "Brief Description",
+    "examples": [
+      {
+        "id": "task-app",
+        "category": "mobile,saas",
+        "model": "v3",
+        "input": {
+          "type": "text",
+          "content": "\"Design a modern mobile app for task management with a clean interface, categorized tasks, priority levels, and a progress chart showing completed vs pending tasks. Use a blue and white color scheme.\""
+        },
+        "output": {
+          "type": "iframe",
+          "content": "https://designai-showcase.github.io/medium-task-app",
+          "height": 300
+        }
+      }
+    ]
+  },
+  "complex": {
+    "title": "Full PRD",
+    "examples": [
+      {
+        "id": "ai-platform",
+        "category": "saas,dashboard",
+        "model": "v3-0324",
+        "input": {
+          "type": "text",
+          "content": "PRD Excerpt:\n\"Design an AI-powered content generation platform with adaptive learning capabilities. Include a text editor with real-time AI suggestions, template library, brand voice settings, performance analytics dashboard, and collaborative editing features. The UI should be minimal, accessible and support both light and dark themes...\""
+        },
+        "output": {
+          "type": "iframe",
+          "content": "https://designai-showcase.github.io/complex-ai-platform",
+          "height": 300
+        }
+      }
+    ]
+  }
+}
