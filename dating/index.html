@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Connections</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            border: 12px solid #1a1a1a;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .screen {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            background-color: #f8fafc;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item.active {
+            color: #7c3aed;
+        }
+        
+        .nav-item.active svg {
+            fill: #7c3aed;
+        }
+        
+        .test-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+        }
+        
+        .match-gradient {
+            background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+        }
+        
+        .profile-gradient {
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+        }
+        
+        .chat-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="phone-frame">
+        <div class="screen">
+            <!-- 首页 -->
+            <div id="home-page" class="h-full flex flex-col">
+                <!-- 顶部导航 -->
+                <div class="flex justify-between items-center p-4">
+                    <h1 class="text-xl font-bold text-gray-800">Cosmic Connections</h1>
+                    <button class="text-gray-600">
+                        <i class="fas fa-cog text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- 匹配卡片 -->
+                <div class="flex-1 overflow-y-auto px-4 pb-20">
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold text-gray-800">今日最佳匹配</h2>
+                            <span class="text-sm text-purple-600">92% 契合度</span>
+                        </div>
+                        
+                        <div class="relative h-64 rounded-xl overflow-hidden mb-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 class="w-full h-full object-cover" alt="匹配用户">
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+                                <h3 class="text-white font-bold text-lg">林晓</h3>
+                                <p class="text-white/90 text-sm">28岁 · INFJ · 高敏感</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <button class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center">
+                                <i class="fas fa-times text-red-500 text-xl"></i>
+                            </button>
+                            <button class="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center">
+                                <i class="fas fa-heart text-green-500 text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 匹配分析 -->
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">你们的匹配分析</h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">八字合婚</span>
+                                    <span class="text-sm font-medium text-purple-600">89%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 89%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">生肖配对</span>
+                                    <span class="text-sm font-medium text-purple-600">95%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">MBTI兼容</span>
+                                    <span class="text-sm font-medium text-purple-600">78%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">敏感度匹配</span>
+                                    <span class="text-sm font-medium text-purple-600">91%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 91%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 测试推荐 -->
+                    <div class="bg-white rounded-2xl p-6 card">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">完善你的测试档案</h2>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="test-gradient rounded-xl p-4 text-white">
+                                <i class="fas fa-calendar-day text-2xl mb-2"></i>
+                                <h3 class="font-medium mb-1">八字测试</h3>
+                                <p class="text-xs opacity-80">完成度 65%</p>
+                            </div>
+                            
+                            <div class="bg-indigo-500 rounded-xl p-4 text-white">
+                                <i class="fas fa-dragon text-2xl mb-2"></i>
+                                <h3 class="font-medium mb-1">生肖测试</h3>
+                                <p class="text-xs opacity-80">完成度 100%</p>
+                            </div>
+                            
+                            <div class="bg-pink-500 rounded-xl p-4 text-white">
+                                <i class="fas fa-brain text-2xl mb-2"></i>
+                                <h3 class="font-medium mb-1">MBTI测试</h3>
+                                <p class="text-xs opacity-80">完成度 100%</p>
+                            </div>
+                            
+                            <div class="bg-amber-500 rounded-xl p-4 text-white">
+                                <i class="fas fa-heart text-2xl mb-2"></i>
+                                <h3 class="font-medium mb-1">HSP测试</h3>
+                                <p class="text-xs opacity-80">完成度 45%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 测试页面 -->
+            <div id="tests-page" class="h-full flex flex-col hidden">
+                <div class="p-4">
+                    <h1 class="text-xl font-bold text-gray-800">个性测试</h1>
+                    <p class="text-sm text-gray-500">完成测试提升匹配精准度</p>
+                </div>
+                
+                <div class="flex-1 overflow-y-auto px-4 pb-20">
+                    <!-- 八字测试 -->
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <div class="flex items-start">
+                            <div class="test-gradient w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-calendar-day text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800 mb-1">八字测试</h3>
+                                <p class="text-sm text-gray-600 mb-3">基于传统命理学的深度分析</p>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 65%"></div>
+                                </div>
+                                <button class="w-full py-2 bg-purple-600 text-white rounded-lg text-sm font-medium">
+                                    继续测试
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- MBTI测试 -->
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <div class="flex items-start">
+                            <div class="bg-pink-500 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-brain text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800 mb-1">MBTI测试</h3>
+                                <p class="text-sm text-gray-600 mb-3">16型人格特质分析</p>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                    <div class="bg-pink-500 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                                <button class="w-full py-2 bg-gray-100 text-gray-800 rounded-lg text-sm font-medium">
+                                    已完成
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 高敏感测试 -->
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <div class="flex items-start">
+                            <div class="bg-amber-500 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-heart text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800 mb-1">高敏感测试</h3>
+                                <p class="text-sm text-gray-600 mb-3">HSP人群特质分析</p>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                    <div class="bg-amber-500 h-2 rounded-full" style="width: 45%"></div>
+                                </div>
+                                <button class="w-full py-2 bg-amber-500 text-white rounded-lg text-sm font-medium">
+                                    继续测试
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 生肖测试 -->
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <div class="flex items-start">
+                            <div class="bg-indigo-500 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-dragon text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800 mb-1">生肖测试</h3>
+                                <p class="text-sm text-gray-600 mb-3">传统生肖配对分析</p>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                    <div class="bg-indigo-500 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                                <button class="w-full py-2 bg-gray-100 text-gray-800 rounded-lg text-sm font-medium">
+                                    已完成
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 聊天页面 -->
+            <div id="chat-page" class="h-full flex flex-col hidden">
+                <div class="p-4 border-b border-gray-200">
+                    <h1 class="text-xl font-bold text-gray-800">消息</h1>
+                </div>
+                
+                <div class="flex-1 overflow-y-auto pb-20">
+                    <!-- 聊天列表 -->
+                    <div class="px-4 py-3 flex items-center border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
+                        <div class="relative mr-3">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 class="w-12 h-12 rounded-full object-cover" alt="用户头像">
+                            <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-medium text-gray-800">林晓</h3>
+                                <span class="text-xs text-gray-500">12:30</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">我们的八字匹配度很高呢！</p>
+                        </div>
+                    </div>
+                    
+                    <div class="px-4 py-3 flex items-center border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
+                        <div class="relative mr-3">
+                            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                                 class="w-12 h-12 rounded-full object-cover" alt="用户头像">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-medium text-gray-800">王明</h3>
+                                <span class="text-xs text-gray-500">昨天</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">我们的MBTI很互补</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 个人资料页面 -->
+            <div id="profile-page" class="h-full flex flex-col hidden">
+                <div class="p-4">
+                    <h1 class="text-xl font-bold text-gray-800">我的档案</h1>
+                </div>
+                
+                <div class="flex-1 overflow-y-auto px-4 pb-20">
+                    <!-- 用户信息 -->
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <div class="flex flex-col items-center">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" 
+                                 class="w-20 h-20 rounded-full object-cover mb-4" alt="用户头像">
+                            <h2 class="text-xl font-bold text-gray-800 mb-1">张雨</h2>
+                            <p class="text-sm text-gray-600 mb-4">28岁 · 北京</p>
+                            <button class="w-full py-2 bg-gray-100 text-gray-800 rounded-lg text-sm font-medium">
+                                编辑资料
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 我的测试结果 -->
+                    <div class="bg-white rounded-2xl p-6 mb-4 card">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">我的测试结果</h2>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="bg-indigo-100 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-dragon text-indigo-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-sm font-medium text-gray-800">生肖属相</h3>
+                                    <p class="text-xs text-gray-600">龙</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="bg-pink-100 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-brain text-pink-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-sm font-medium text-gray-800">MBTI类型</h3>
+                                    <p class="text-xs text-gray-600">INFJ</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="bg-amber-100 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-heart text-amber-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-sm font-medium text-gray-800">敏感度</h3>
+                                    <p class="text-xs text-gray-600">高敏感人群</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 设置 -->
+                    <div class="bg-white rounded-2xl p-6 card">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">设置</h2>
+                        
+                        <div class="space-y-3">
+                            <button class="w-full flex items-center justify-between py-3">
+                                <span class="text-gray-800">账号设置</span>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </button>
+                            
+                            <button class="w-full flex items-center justify-between py-3">
+                                <span class="text-gray-800">匹配偏好</span>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </button>
+                            
+                            <button class="w-full flex items-center justify-between py-3">
+                                <span class="text-gray-800">通知设置</span>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </button>
+                            
+                            <button class="w-full flex items-center justify-between py-3">
+                                <span class="text-gray-800">帮助与反馈</span>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 底部导航 -->
+            <div class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around py-3">
+                <button class="nav-item active flex flex-col items-center" onclick="showPage('home-page')">
+                    <i class="fas fa-home text-xl mb-1"></i>
+                    <span class="text-xs">匹配</span>
+                </button>
+                
+                <button class="nav-item flex flex-col items-center" onclick="showPage('tests-page')">
+                    <i class="fas fa-clipboard-list text-xl mb-1"></i>
+                    <span class="text-xs">测试</span>
+                </button>
+                
+                <button class="nav-item flex flex-col items-center" onclick="showPage('chat-page')">
+                    <i class="fas fa-comment-dots text-xl mb-1"></i>
+                    <span class="text-xs">消息</span>
+                </button>
+                
+                <button class="nav-item flex flex-col items-center" onclick="showPage('profile-page')">
+                    <i class="fas fa-user text-xl mb-1"></i>
+                    <span class="text-xs">我的</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // 隐藏所有页面
+            document.querySelectorAll('.screen > div').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // 显示选中的页面
+            document.getElementById(pageId).classList.remove('hidden');
+            
+            // 更新导航项状态
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
