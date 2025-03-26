@@ -1,0 +1,238 @@
+{
+  "common": {
+    "appName": "DeepSeek AI UI UX Design"
+  },
+  "page": {
+    "title": "AI-Powered Design Assistant - From Idea to UI Design in Seconds | DeepSeek AI UI UX Design"
+  },
+  "nav": {
+    "features": "Features",
+    "playground": "Playground",
+    "compare": "Compare",
+    "pricing": "Pricing",
+    "login": "Login",
+    "signup": "Sign Up Free"
+  },
+  "hero": {
+    "title": "Transform Ideas Into Professional UI UX Designs With DeepSeek AI",
+    "subtitle": "Our DeepSeek AI-powered UI UX design assistant turns your text descriptions into beautiful, ready-to-use UI UX designs. Experience advanced DeepSeek AI UI UX design capabilities with no design skills required.",
+    "cta": "Try For Free",
+    "playground": "Try Playground",
+    "users": "Active Users",
+    "designs": "Designs Generated",
+    "rating": "User Rating"
+  },
+  "logos": {
+    "trusted": "Trusted by designers and teams at"
+  },
+  "features": {
+    "title": "How DesignAI Works",
+    "subtitle": "From text to design in three simple steps",
+    "step1": {
+      "title": "Describe Your Design",
+      "desc": "Enter a detailed description of the UI you want to create. Be as specific as you like about layout, colors, and components."
+    },
+    "step2": {
+      "title": "AI Generates Options",
+      "desc": "Our AI analyzes your description and generates multiple design options based on the latest UI/UX principles and trends."
+    },
+    "step3": {
+      "title": "Export & Customize",
+      "desc": "Download your design in multiple formats (HTML/CSS, Figma, SVG) or refine it further with simple text commands."
+    }
+  },
+  "playground": {
+    "title": "Try The AI Design Assistant",
+    "subtitle": "See how our AI transforms your text into UI designs in real-time",
+    "inputTitle": "Your Design Description",
+    "templates": "Templates:",
+    "customPrompt": "Custom prompt",
+    "dashboardTemplate": "Dashboard",
+    "landingTemplate": "Landing page",
+    "mobileTemplate": "Mobile app",
+    "formTemplate": "Form",
+    "promptPlaceholder": "Describe the UI you want to create...",
+    "style": "Style:",
+    "styleMinimal": "Minimal",
+    "styleModern": "Modern",
+    "stylePlayful": "Playful",
+    "theme": "Theme:",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "generateBtn": "Generate Design",
+    "resultTitle": "Generated Design",
+    "regenerate": "Regenerate",
+    "download": "Download",
+    "generating": "Generating your design...",
+    "enterPrompt": "Enter a description and click \"Generate Design\" to see the result",
+    "exportAs": "Export as:",
+    "htmlcss": "HTML/CSS",
+    "svg": "SVG",
+    "figma": "Figma",
+    "react": "React"
+  },
+  "benefits": {
+    "title": "Why Designers & Developers Love DesignAI",
+    "time": {
+      "title": "Save 80% Design Time",
+      "desc": "Go from idea to visuals in seconds instead of hours. Focus on refining rather than creating from scratch."
+    },
+    "iteration": {
+      "title": "Rapid Iteration",
+      "desc": "Generate multiple design variations instantly and iterate quickly based on feedback."
+    },
+    "skills": {
+      "title": "No Design Skills Needed",
+      "desc": "Simply describe what you want in plain language. Our AI handles all the design complexity."
+    },
+    "formats": {
+      "title": "Multiple Export Formats",
+      "desc": "Download designs as ready-to-use HTML/CSS, SVG, or export directly to Figma or as React components."
+    }
+  },
+  "compare": {
+    "title": "How DeepSeek AI UI UX Design Compares",
+    "subtitle": "See why our AI design solution outperforms traditional methods and competitors",
+    "feature": "Feature/Capability",
+    "designai": "DeepSeek AI UI UX",
+    "traditional": "Traditional Design",
+    "competitor1": "same.new",
+    "competitor2": "copyweb.ai",
+    "speed": "Design Generation Speed",
+    "skill": "Required Skill Level",
+    "input": "Input Method",
+    "export": "Export Formats",
+    "iteration": "Iteration Speed",
+    "custom": "Customization",
+    "component": "Component Library",
+    "trends": "Design Trends"
+  },
+  "painPoints": {
+    "title": "Common Design Challenges Solved",
+    "subtitle": "How DesignAI eliminates traditional design roadblocks",
+    "solution": "DesignAI Solution:",
+    "time": {
+      "title": "Time-Consuming Design Process",
+      "problem": "Traditional UI design requires hours of work, multiple iterations, and skilled designers.",
+      "solution": "Generate complete designs in seconds with a single text prompt, allowing you to focus on refinement rather than starting from scratch."
+    },
+    "skills": {
+      "title": "Design Skills Barrier",
+      "problem": "Developers and product managers often lack the design expertise needed to create professional UIs.",
+      "solution": "Our AI bridges the gap by turning text descriptions into professional designs, democratizing the design process for everyone on the team."
+    },
+    "consistency": {
+      "title": "Design Inconsistency",
+      "problem": "Maintaining design consistency across multiple screens and components is challenging and error-prone.",
+      "solution": "Our AI ensures perfect consistency by automatically applying the same design principles and styles across all generated elements."
+    },
+    "prototype": {
+      "title": "Slow Prototyping",
+      "problem": "Creating multiple design options for testing and feedback is resource-intensive and slows development.",
+      "solution": "Generate countless variations in seconds, test different approaches, and iterate rapidly based on feedback, accelerating your product development cycle."
+    }
+  },
+  "testimonials": {
+    "title": "What Our Users Say",
+    "quote1": "DesignAI has completely transformed our workflow. What used to take days now takes minutes. Our team can focus on strategy and implementation rather than getting bogged down in UI design details.",
+    "author1": "Sarah Johnson",
+    "role1": "Product Manager at TechCorp",
+    "quote2": "As a developer with limited design skills, DesignAI is a game-changer. I can now create professional-looking UIs without needing to hire a designer for every small project.",
+    "author2": "Alex Chen",
+    "role2": "Full-Stack Developer",
+    "quote3": "We've cut our design time by 70% using DesignAI. The ability to quickly generate and iterate on designs has been invaluable for presenting options to clients and getting projects approved faster.",
+    "author3": "Maria Garcia",
+    "role3": "Design Director at CreativeStudio"
+  },
+  "showcase": {
+    "title": "Design Showcase",
+    "subtitle": "See how our AI transforms inputs of varying complexity into beautiful designs",
+    "simpleTab": "One Sentence",
+    "mediumTab": "Brief Description", 
+    "complexTab": "Full PRD",
+    "filterBy": "Filter by:",
+    "modelFilter": "DeepSeek Model:",
+    "inputLabel": "Input",
+    "outputLabel": "Output",
+    "simpleInput": "\"Create a dark mode dashboard with analytics charts\"",
+    "mediumInput": "\"Design a modern mobile app for task management with a clean interface, categorized tasks, priority levels, and a progress chart showing completed vs pending tasks. Use a blue and white color scheme.\"",
+    "complexInput": "PRD Excerpt:\n\"Design an AI-powered content generation platform with adaptive learning capabilities. Include a text editor with real-time AI suggestions, template library, brand voice settings, performance analytics dashboard, and collaborative editing features. The UI should be minimal, accessible and support both light and dark themes...\"",
+    "prevPage": "Previous",
+    "nextPage": "Next",
+    "page": "Page"
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that fits your needs",
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "save": "Save 20%",
+    "forever": "Forever",
+    "perMonth": "per month",
+    "popular": "Most Popular",
+    "guarantee": "30-day money-back guarantee. No questions asked.",
+    "free": {
+      "title": "Free",
+      "desc": "Perfect for trying out DesignAI",
+      "feature1": "10 designs per month",
+      "feature2": "Basic export formats (PNG, SVG)",
+      "feature3": "Standard design styles",
+      "feature4": "Community support",
+      "cta": "Get Started"
+    },
+    "pro": {
+      "title": "Pro",
+      "desc": "For designers and developers",
+      "feature1": "Unlimited designs",
+      "feature2": "All export formats (HTML/CSS, Figma, React)",
+      "feature3": "Advanced style customization",
+      "feature4": "Priority support",
+      "feature5": "Design history & revisions",
+      "cta": "Try Free for 7 Days"
+    },
+    "team": {
+      "title": "Team",
+      "desc": "For teams and agencies",
+      "feature1": "Everything in Pro plan",
+      "feature2": "5 team members (add more for $15/each)",
+      "feature3": "Team design library",
+      "feature4": "Design system generation",
+      "feature5": "Custom branding",
+      "feature6": "Dedicated account manager",
+      "cta": "Contact Sales"
+    }
+  },
+  "cta": {
+    "title": "Ready to Transform Your Design Process?",
+    "subtitle": "Join thousands of designers and developers who've already switched to AI-powered design",
+    "primary": "Try DesignAI Free",
+    "secondary": "Schedule a Demo",
+    "nocc": "No credit card required",
+    "setup": "Easy setup",
+    "cancel": "Cancel anytime"
+  },
+  "footer": {
+    "tagline": "DeepSeek AI-powered UI UX design assistant that transforms ideas into beautiful UI UX designs in seconds.",
+    "product": "Product",
+    "features": "Features",
+    "pricing": "Pricing",
+    "customers": "Customers",
+    "whatsnew": "What's New",
+    "company": "Company",
+    "about": "About Us",
+    "careers": "Careers",
+    "blog": "Blog",
+    "press": "Press",
+    "resources": "Resources",
+    "docs": "Documentation",
+    "tutorials": "Tutorials",
+    "support": "Support",
+    "api": "API",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "security": "Security",
+    "rights": "All rights reserved.",
+    "language": "Language:"
+  }
+}

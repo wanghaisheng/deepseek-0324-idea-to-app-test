@@ -1,0 +1,238 @@
+{
+  "common": {
+    "appName": "DeepSeek AI 界面设计助手"
+  },
+  "page": {
+    "title": "DeepSeek AI驱动的UI UX设计助手 - 几秒钟内将想法转化为界面设计"
+  },
+  "nav": {
+    "features": "功能",
+    "playground": "在线体验",
+    "compare": "对比",
+    "pricing": "价格",
+    "login": "登录",
+    "signup": "免费注册"
+  },
+  "hero": {
+    "title": "使用DeepSeek AI将创意转化为专业UI UX设计只需几秒钟",
+    "subtitle": "我们的DeepSeek AI驱动UI UX设计助手将文字描述转化为美观、可直接使用的UI UX设计。体验DeepSeek AI强大的界面设计能力，无需设计技能。",
+    "cta": "免费试用",
+    "playground": "立即体验",
+    "users": "活跃用户",
+    "designs": "已生成设计",
+    "rating": "用户评分"
+  },
+  "logos": {
+    "trusted": "受到以下公司设计师和团队的信赖"
+  },
+  "features": {
+    "title": "设计助手如何工作",
+    "subtitle": "三个简单步骤，从文字到设计",
+    "step1": {
+      "title": "描述您的设计",
+      "desc": "输入您想要创建的UI的详细描述。您可以具体说明布局、颜色和组件。"
+    },
+    "step2": {
+      "title": "AI生成选项",
+      "desc": "我们的AI分析您的描述，并基于最新的UI/UX原则和趋势生成多个设计选项。"
+    },
+    "step3": {
+      "title": "导出与自定义",
+      "desc": "以多种格式下载您的设计(HTML/CSS、Figma、SVG)，或通过简单的文字命令进一步完善。"
+    }
+  },
+  "playground": {
+    "title": "试用AI设计助手",
+    "subtitle": "实时体验我们的AI如何将文字转化为UI设计",
+    "inputTitle": "您的设计描述",
+    "templates": "模板：",
+    "customPrompt": "自定义提示",
+    "dashboardTemplate": "仪表盘",
+    "landingTemplate": "落地页",
+    "mobileTemplate": "移动应用",
+    "formTemplate": "表单",
+    "promptPlaceholder": "描述您想要创建的UI...",
+    "style": "风格：",
+    "styleMinimal": "极简",
+    "styleModern": "现代",
+    "stylePlayful": "活泼",
+    "theme": "主题：",
+    "themeLight": "明亮",
+    "themeDark": "暗黑",
+    "generateBtn": "生成设计",
+    "resultTitle": "生成的设计",
+    "regenerate": "重新生成",
+    "download": "下载",
+    "generating": "正在生成您的设计...",
+    "enterPrompt": "输入描述并点击"生成设计"查看结果",
+    "exportAs": "导出为：",
+    "htmlcss": "HTML/CSS",
+    "svg": "SVG",
+    "figma": "Figma",
+    "react": "React"
+  },
+  "benefits": {
+    "title": "为什么设计师和开发者喜爱设计助手",
+    "time": {
+      "title": "节省80%设计时间",
+      "desc": "从创意到可视化仅需几秒而非几小时。专注于优化而非从零开始创作。"
+    },
+    "iteration": {
+      "title": "快速迭代",
+      "desc": "即时生成多个设计变体，基于反馈快速迭代。"
+    },
+    "skills": {
+      "title": "无需设计技能",
+      "desc": "只需用普通语言描述您的需求。我们的AI处理所有设计复杂性。"
+    },
+    "formats": {
+      "title": "多种导出格式",
+      "desc": "将设计下载为即用型HTML/CSS、SVG，或直接导出到Figma或React组件。"
+    }
+  },
+  "compare": {
+    "title": "DeepSeek AI UI UX设计助手对比",
+    "subtitle": "了解为什么我们的AI设计解决方案优于传统方法和竞争对手",
+    "feature": "功能/能力",
+    "designai": "DeepSeek AI UI UX",
+    "traditional": "传统设计",
+    "competitor1": "same.new",
+    "competitor2": "copyweb.ai",
+    "speed": "设计生成速度",
+    "skill": "所需技能水平",
+    "input": "输入方式",
+    "export": "导出格式",
+    "iteration": "迭代速度",
+    "custom": "自定义能力",
+    "component": "组件库",
+    "trends": "设计趋势"
+  },
+  "painPoints": {
+    "title": "解决常见设计挑战",
+    "subtitle": "设计助手如何消除传统设计障碍",
+    "solution": "设计助手解决方案：",
+    "time": {
+      "title": "耗时的设计过程",
+      "problem": "传统UI设计需要数小时的工作、多次迭代和熟练的设计师。",
+      "solution": "通过单个文本提示在几秒钟内生成完整设计，让您专注于完善而不是从头开始创建。"
+    },
+    "skills": {
+      "title": "设计技能障碍",
+      "problem": "开发人员和产品经理通常缺乏创建专业UI所需的设计专业知识。",
+      "solution": "我们的AI通过将文本描述转换为专业设计来弥合差距，使团队中的每个人都能参与设计过程。"
+    },
+    "consistency": {
+      "title": "设计不一致",
+      "problem": "在多个屏幕和组件中保持设计一致性具有挑战性且容易出错。",
+      "solution": "我们的AI通过自动在所有生成的元素中应用相同的设计原则和样式，确保完美的一致性。"
+    },
+    "prototype": {
+      "title": "原型制作缓慢",
+      "problem": "为测试和反馈创建多个设计选项需要大量资源并减缓开发速度。",
+      "solution": "在几秒钟内生成无数变体，测试不同方法，并根据反馈快速迭代，加速产品开发周期。"
+    }
+  },
+  "showcase": {
+    "title": "设计案例展示",
+    "subtitle": "查看我们的AI如何将不同复杂程度的输入转换为精美设计",
+    "simpleTab": "单句描述",
+    "mediumTab": "简要说明",
+    "complexTab": "完整PRD",
+    "filterBy": "筛选：",
+    "modelFilter": "DeepSeek模型：",
+    "inputLabel": "输入",
+    "outputLabel": "输出",
+    "simpleInput": "\"创建一个带有分析图表的深色模式仪表板\"",
+    "mediumInput": "\"设计一个现代化的任务管理移动应用，界面简洁，任务分类，优先级，以及显示已完成与待处理任务的进度图表。使用蓝白配色方案。\"",
+    "complexInput": "PRD摘录：\n\"设计一个具有自适应学习能力的AI驱动内容生成平台。包括带有实时AI建议的文本编辑器、模板库、品牌语音设置、性能分析仪表板和协作编辑功能。UI应该简约、易用并支持明暗两种主题...\"",
+    "prevPage": "上一页",
+    "nextPage": "下一页",
+    "page": "页"
+  },
+  "testimonials": {
+    "title": "用户评价",
+    "quote1": "设计助手彻底改变了我们的工作流程。过去需要数天的工作现在只需几分钟。我们的团队可以专注于策略和实施，而不是陷入UI设计细节。",
+    "author1": "莎拉·约翰逊",
+    "role1": "科技公司产品经理",
+    "quote2": "作为一个设计技能有限的开发者，设计助手是一个游戏规则的改变者。我现在可以创建专业外观的UI，而不需要为每个小项目雇佣设计师。",
+    "author2": "陈亚历克斯",
+    "role2": "全栈开发者",
+    "quote3": "使用设计助手，我们的设计时间减少了70%。快速生成和迭代设计的能力对于向客户展示选项和更快获得项目批准是无价的。",
+    "author3": "玛丽亚·加西亚",
+    "role3": "创意工作室设计总监"
+  },
+  "pricing": {
+    "title": "简单透明的价格",
+    "subtitle": "选择适合您需求的计划",
+    "monthly": "月付",
+    "annual": "年付",
+    "save": "节省20%",
+    "forever": "永久免费",
+    "perMonth": "每月",
+    "popular": "最受欢迎",
+    "guarantee": "30天退款保证。无需任何理由。",
+    "free": {
+      "title": "免费版",
+      "desc": "非常适合尝试设计助手",
+      "feature1": "每月10个设计",
+      "feature2": "基本导出格式(PNG、SVG)",
+      "feature3": "标准设计风格",
+      "feature4": "社区支持",
+      "cta": "开始使用"
+    },
+    "pro": {
+      "title": "专业版",
+      "desc": "适合设计师和开发者",
+      "feature1": "无限设计",
+      "feature2": "所有导出格式(HTML/CSS、Figma、React)",
+      "feature3": "高级风格定制",
+      "feature4": "优先支持",
+      "feature5": "设计历史和修订",
+      "cta": "免费试用7天"
+    },
+    "team": {
+      "title": "团队版",
+      "desc": "适合团队和代理机构",
+      "feature1": "专业版的所有功能",
+      "feature2": "5个团队成员(每增加一个成员加$15)",
+      "feature3": "团队设计库",
+      "feature4": "设计系统生成",
+      "feature5": "自定义品牌",
+      "feature6": "专属客户经理",
+      "cta": "联系销售"
+    }
+  },
+  "cta": {
+    "title": "准备好改变您的设计流程了吗？",
+    "subtitle": "加入已经切换到AI驱动设计的数千名设计师和开发者",
+    "primary": "免费试用设计助手",
+    "secondary": "安排演示",
+    "nocc": "无需信用卡",
+    "setup": "简单设置",
+    "cancel": "随时取消"
+  },
+  "footer": {
+    "tagline": "DeepSeek AI驱动的UI UX设计助手，几秒钟内将创意转化为美观的界面设计。",
+    "product": "产品",
+    "features": "功能",
+    "pricing": "价格",
+    "customers": "客户",
+    "whatsnew": "新功能",
+    "company": "公司",
+    "about": "关于我们",
+    "careers": "招聘",
+    "blog": "博客",
+    "press": "新闻",
+    "resources": "资源",
+    "docs": "文档",
+    "tutorials": "教程",
+    "support": "支持",
+    "api": "API",
+    "legal": "法律",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "security": "安全",
+    "rights": "版权所有。",
+    "language": "语言："
+  }
+}

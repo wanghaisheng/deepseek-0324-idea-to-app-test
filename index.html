@@ -1,445 +1,807 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Connections</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
-        
-        body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-        }
-        
-        .phone-frame {
-            width: 375px;
-            height: 812px;
-            border: 12px solid #1a1a1a;
-            border-radius: 40px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        
-        .screen {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            position: relative;
-            background-color: #f8fafc;
-        }
-        
-        .card {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-        }
-        
-        .nav-item.active {
-            color: #7c3aed;
-        }
-        
-        .nav-item.active svg {
-            fill: #7c3aed;
-        }
-        
-        .test-gradient {
-            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
-        }
-        
-        .match-gradient {
-            background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
-        }
-        
-        .profile-gradient {
-            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
-        }
-        
-        .chat-gradient {
-            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-        }
-    </style>
-</head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="phone-frame">
-        <div class="screen">
-            <!-- 首页 -->
-            <div id="home-page" class="h-full flex flex-col">
-                <!-- 顶部导航 -->
-                <div class="flex justify-between items-center p-4">
-                    <h1 class="text-xl font-bold text-gray-800">Cosmic Connections</h1>
-                    <button class="text-gray-600">
-                        <i class="fas fa-cog text-xl"></i>
-                    </button>
-                </div>
-                
-                <!-- 匹配卡片 -->
-                <div class="flex-1 overflow-y-auto px-4 pb-20">
-                    <div class="bg-white rounded-2xl p-6 mb-4 card">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-semibold text-gray-800">今日最佳匹配</h2>
-                            <span class="text-sm text-purple-600">92% 契合度</span>
-                        </div>
-                        
-                        <div class="relative h-64 rounded-xl overflow-hidden mb-4">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
-                                 class="w-full h-full object-cover" alt="匹配用户">
-                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
-                                <h3 class="text-white font-bold text-lg">林晓</h3>
-                                <p class="text-white/90 text-sm">28岁 · INFJ · 高敏感</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-between">
-                            <button class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center">
-                                <i class="fas fa-times text-red-500 text-xl"></i>
-                            </button>
-                            <button class="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center">
-                                <i class="fas fa-heart text-green-500 text-xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- 匹配分析 -->
-                    <div class="bg-white rounded-2xl p-6 mb-4 card">
-                        <h2 class="text-lg font-semibold text-gray-800 mb-4">你们的匹配分析</h2>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium text-gray-700">八字合婚</span>
-                                    <span class="text-sm font-medium text-purple-600">89%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 89%"></div>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium text-gray-700">生肖配对</span>
-                                    <span class="text-sm font-medium text-purple-600">95%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 95%"></div>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium text-gray-700">MBTI兼容</span>
-                                    <span class="text-sm font-medium text-purple-600">78%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 78%"></div>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium text-gray-700">敏感度匹配</span>
-                                    <span class="text-sm font-medium text-purple-600">91%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 91%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 测试推荐 -->
-                    <div class="bg-white rounded-2xl p-6 card">
-                        <h2 class="text-lg font-semibold text-gray-800 mb-4">完善你的测试档案</h2>
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="test-gradient rounded-xl p-4 text-white">
-                                <i class="fas fa-calendar-day text-2xl mb-2"></i>
-                                <h3 class="font-medium mb-1">八字测试</h3>
-                                <p class="text-xs opacity-80">完成度 65%</p>
-                            </div>
-                            
-                            <div class="bg-indigo-500 rounded-xl p-4 text-white">
-                                <i class="fas fa-dragon text-2xl mb-2"></i>
-                                <h3 class="font-medium mb-1">生肖测试</h3>
-                                <p class="text-xs opacity-80">完成度 100%</p>
-                            </div>
-                            
-                            <div class="bg-pink-500 rounded-xl p-4 text-white">
-                                <i class="fas fa-brain text-2xl mb-2"></i>
-                                <h3 class="font-medium mb-1">MBTI测试</h3>
-                                <p class="text-xs opacity-80">完成度 100%</p>
-                            </div>
-                            
-                            <div class="bg-amber-500 rounded-xl p-4 text-white">
-                                <i class="fas fa-heart text-2xl mb-2"></i>
-                                <h3 class="font-medium mb-1">HSP测试</h3>
-                                <p class="text-xs opacity-80">完成度 45%</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 测试页面 -->
-            <div id="tests-page" class="h-full flex flex-col hidden">
-                <div class="p-4">
-                    <h1 class="text-xl font-bold text-gray-800">个性测试</h1>
-                    <p class="text-sm text-gray-500">完成测试提升匹配精准度</p>
-                </div>
-                
-                <div class="flex-1 overflow-y-auto px-4 pb-20">
-                    <!-- 八字测试 -->
-                    <div class="bg-white rounded-2xl p-6 mb-4 card">
-                        <div class="flex items-start">
-                            <div class="test-gradient w-12 h-12 rounded-xl flex items-center justify-center mr-4">
-                                <i class="fas fa-calendar-day text-white text-xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="font-semibold text-gray-800 mb-1">八字测试</h3>
-                                <p class="text-sm text-gray-600 mb-3">基于传统命理学的深度分析</p>
-                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 65%"></div>
-                                </div>
-                                <button class="w-full py-2 bg-purple-600 text-white rounded-lg text-sm font-medium">
-                                    继续测试
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- MBTI测试 -->
-                    <div class="bg-white rounded-2xl p-6 mb-4 card">
-                        <div class="flex items-start">
-                            <div class="bg-pink-500 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
-                                <i class="fas fa-brain text-white text-xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="font-semibold text-gray-800 mb-1">MBTI测试</h3>
-                                <p class="text-sm text-gray-600 mb-3">16型人格特质分析</p>
-                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                                    <div class="bg-pink-500 h-2 rounded-full" style="width: 100%"></div>
-                                </div>
-                                <button class="w-full py-2 bg-gray-100 text-gray-800 rounded-lg text-sm font-medium">
-                                    已完成
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 高敏感测试 -->
-                    <div class="bg-white rounded-2xl p-6 mb-4 card">
-                        <div class="flex items-start">
-                            <div class="bg-amber-500 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
-                                <i class="fas fa-heart text-white text-xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="font-semibold text-gray-800 mb-1">高敏感测试</h3>
-                                <p class="text-sm text-gray-600 mb-3">HSP人群特质分析</p>
-                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                                    <div class="bg-amber-500 h-2 rounded-full" style="width: 45%"></div>
-                                </div>
-                                <button class="w-full py-2 bg-amber-500 text-white rounded-lg text-sm font-medium">
-                                    继续测试
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 生肖测试 -->
-                    <div class="bg-white rounded-2xl p-6 mb-4 card">
-                        <div class="flex items-start">
-                            <div class="bg-indigo-500 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
-                                <i class="fas fa-dragon text-white text-xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="font-semibold text-gray-800 mb-1">生肖测试</h3>
-                                <p class="text-sm text-gray-600 mb-3">传统生肖配对分析</p>
-                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                                    <div class="bg-indigo-500 h-2 rounded-full" style="width: 100%"></div>
-                                </div>
-                                <button class="w-full py-2 bg-gray-100 text-gray-800 rounded-lg text-sm font-medium">
-                                    已完成
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 聊天页面 -->
-            <div id="chat-page" class="h-full flex flex-col hidden">
-                <div class="p-4 border-b border-gray-200">
-                    <h1 class="text-xl font-bold text-gray-800">消息</h1>
-                </div>
-                
-                <div class="flex-1 overflow-y-auto pb-20">
-                    <!-- 聊天列表 -->
-                    <div class="px-4 py-3 flex items-center border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
-                        <div class="relative mr-3">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
-                                 class="w-12 h-12 rounded-full object-cover" alt="用户头像">
-                            <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex justify-between items-center">
-                                <h3 class="font-medium text-gray-800">林晓</h3>
-                                <span class="text-xs text-gray-500">12:30</span>
-                            </div>
-                            <p class="text-sm text-gray-600 truncate">我们的八字匹配度很高呢！</p>
-                        </div>
-                    </div>
-                    
-                    <div class="px-4 py-3 flex items-center border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
-                        <div class="relative mr-3">
-                            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
-                                 class="w-12 h-12 rounded-full object-cover" alt="用户头像">
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex justify-between items-center">
-                                <h3 class="font-medium text-gray-800">王明</h3>
-                                <span class="text-xs text-gray-500">昨天</span>
-                            </div>
-                            <p class="text-sm text-gray-600 truncate">我们的MBTI很互补</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 个人资料页面 -->
-            <div id="profile-page" class="h-full flex flex-col hidden">
-                <div class="p-4">
-                    <h1 class="text-xl font-bold text-gray-800">我的档案</h1>
-                </div>
-                
-                <div class="flex-1 overflow-y-auto px-4 pb-20">
-                    <!-- 用户信息 -->
-                    <div class="bg-white rounded-2xl p-6 mb-4 card">
-                        <div class="flex flex-col items-center">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" 
-                                 class="w-20 h-20 rounded-full object-cover mb-4" alt="用户头像">
-                            <h2 class="text-xl font-bold text-gray-800 mb-1">张雨</h2>
-                            <p class="text-sm text-gray-600 mb-4">28岁 · 北京</p>
-                            <button class="w-full py-2 bg-gray-100 text-gray-800 rounded-lg text-sm font-medium">
-                                编辑资料
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- 我的测试结果 -->
-                    <div class="bg-white rounded-2xl p-6 mb-4 card">
-                        <h2 class="text-lg font-semibold text-gray-800 mb-4">我的测试结果</h2>
-                        
-                        <div class="space-y-4">
-                            <div class="flex items-center">
-                                <div class="bg-indigo-100 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
-                                    <i class="fas fa-dragon text-indigo-600"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h3 class="text-sm font-medium text-gray-800">生肖属相</h3>
-                                    <p class="text-xs text-gray-600">龙</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center">
-                                <div class="bg-pink-100 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
-                                    <i class="fas fa-brain text-pink-600"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h3 class="text-sm font-medium text-gray-800">MBTI类型</h3>
-                                    <p class="text-xs text-gray-600">INFJ</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center">
-                                <div class="bg-amber-100 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
-                                    <i class="fas fa-heart text-amber-600"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h3 class="text-sm font-medium text-gray-800">敏感度</h3>
-                                    <p class="text-xs text-gray-600">高敏感人群</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 设置 -->
-                    <div class="bg-white rounded-2xl p-6 card">
-                        <h2 class="text-lg font-semibold text-gray-800 mb-4">设置</h2>
-                        
-                        <div class="space-y-3">
-                            <button class="w-full flex items-center justify-between py-3">
-                                <span class="text-gray-800">账号设置</span>
-                                <i class="fas fa-chevron-right text-gray-400"></i>
-                            </button>
-                            
-                            <button class="w-full flex items-center justify-between py-3">
-                                <span class="text-gray-800">匹配偏好</span>
-                                <i class="fas fa-chevron-right text-gray-400"></i>
-                            </button>
-                            
-                            <button class="w-full flex items-center justify-between py-3">
-                                <span class="text-gray-800">通知设置</span>
-                                <i class="fas fa-chevron-right text-gray-400"></i>
-                            </button>
-                            
-                            <button class="w-full flex items-center justify-between py-3">
-                                <span class="text-gray-800">帮助与反馈</span>
-                                <i class="fas fa-chevron-right text-gray-400"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 底部导航 -->
-            <div class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around py-3">
-                <button class="nav-item active flex flex-col items-center" onclick="showPage('home-page')">
-                    <i class="fas fa-home text-xl mb-1"></i>
-                    <span class="text-xs">匹配</span>
-                </button>
-                
-                <button class="nav-item flex flex-col items-center" onclick="showPage('tests-page')">
-                    <i class="fas fa-clipboard-list text-xl mb-1"></i>
-                    <span class="text-xs">测试</span>
-                </button>
-                
-                <button class="nav-item flex flex-col items-center" onclick="showPage('chat-page')">
-                    <i class="fas fa-comment-dots text-xl mb-1"></i>
-                    <span class="text-xs">消息</span>
-                </button>
-                
-                <button class="nav-item flex flex-col items-center" onclick="showPage('profile-page')">
-                    <i class="fas fa-user text-xl mb-1"></i>
-                    <span class="text-xs">我的</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function showPage(pageId) {
-            // 隐藏所有页面
-            document.querySelectorAll('.screen > div').forEach(page => {
-                page.classList.add('hidden');
-            });
-            
-            // 显示选中的页面
-            document.getElementById(pageId).classList.remove('hidden');
-            
-            // 更新导航项状态
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            event.currentTarget.classList.add('active');
+    <title>DeepSeek AI-Powered UI UX Design Assistant - From Idea to UI Design in Seconds | DeepSeek AI UI UX Design</title>
+    <meta name="description" content="Transform your ideas into beautiful UI UX designs with DeepSeek AI UI UX design assistant. Generate professional DeepSeek AI UI UX designs from text prompts instantly. Unlike same.new or copyweb.ai, we start with text descriptions, not URLs or screenshots.">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "marked": "https://cdn.jsdelivr.net/npm/marked@11.1.1/lib/marked.esm.js"
+            }
         }
     </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <svg viewBox="0 0 32 32" width="32" height="32">
+                    <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm0 30c-7.732 0-14-6.268-14-14S8.268 2 16 2s14 6.268 14 14-6.268 14-14 14z" fill="#0066FF"/>
+                    <path d="M20 12c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-8 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" fill="#0066FF"/>
+                </svg>
+                <span data-i18n="common.appName">DeepSeek AI UI UX Design</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features" data-i18n="nav.features">Features</a></li>
+                    <li><a href="#playground" data-i18n="nav.playground">Playground</a></li>
+                    <li><a href="#compare" data-i18n="nav.compare">Compare</a></li>
+                    <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
+                </ul>
+            </nav>
+            <div class="cta-buttons">
+                <button class="btn btn-secondary" data-i18n="nav.login">Login</button>
+                <button class="btn btn-primary" data-i18n="nav.signup">Sign Up Free</button>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-i18n="hero.title">Transform Ideas Into<br><span class="highlight">Professional UI UX Designs</span><br>With DeepSeek AI</h1>
+                <p data-i18n="hero.subtitle">Our DeepSeek AI-powered UI UX design assistant turns your text descriptions into beautiful, ready-to-use UI UX designs. Experience advanced DeepSeek AI UI UX design capabilities with no design skills required.</p>
+                <div class="cta-group">
+                    <button class="btn btn-primary btn-large" data-i18n="hero.cta">Try For Free</button>
+                    <a href="#playground" class="btn btn-outline btn-large" data-i18n="hero.playground">Try Playground</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">300k+</span>
+                        <span class="stat-label" data-i18n="hero.users">Active Users</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">15M+</span>
+                        <span class="stat-label" data-i18n="hero.designs">Designs Generated</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4.9/5</span>
+                        <span class="stat-label" data-i18n="hero.rating">User Rating</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="demo-animation">
+                    <div class="prompt-input">
+                        <div class="prompt-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="prompt-text">"A minimalist dashboard with dark theme, navigation on left side, statistics cards on top"</div>
+                    </div>
+                    <div class="result-preview">
+                        <svg viewBox="0 0 800 500" class="ui-mock">
+                            <!-- Dark Theme Dashboard Mockup -->
+                            <rect x="0" y="0" width="800" height="500" fill="#1E1E2E" rx="8" ry="8"/>
+                            <!-- Left Navigation -->
+                            <rect x="0" y="0" width="200" height="500" fill="#181825" rx="0" ry="0"/>
+                            <!-- Logo Area -->
+                            <rect x="40" y="30" width="120" height="40" fill="#313244" rx="8" ry="8"/>
+                            <!-- Nav Items -->
+                            <rect x="30" y="120" width="140" height="40" fill="#313244" rx="8" ry="8"/>
+                            <rect x="30" y="180" width="140" height="40" fill="#313244" rx="8" ry="8"/>
+                            <rect x="30" y="240" width="140" height="40" fill="#313244" rx="8" ry="8"/>
+                            <rect x="30" y="300" width="140" height="40" fill="#313244" rx="8" ry="8"/>
+                            <!-- Stats Cards -->
+                            <rect x="230" y="30" width="160" height="100" fill="#313244" rx="8" ry="8"/>
+                            <rect x="410" y="30" width="160" height="100" fill="#313244" rx="8" ry="8"/>
+                            <rect x="590" y="30" width="160" height="100" fill="#313244" rx="8" ry="8"/>
+                            <!-- Main Content Area -->
+                            <rect x="230" y="150" width="520" height="150" fill="#313244" rx="8" ry="8"/>
+                            <rect x="230" y="320" width="250" height="150" fill="#313244" rx="8" ry="8"/>
+                            <rect x="500" y="320" width="250" height="150" fill="#313244" rx="8" ry="8"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="logos">
+        <div class="container">
+            <p data-i18n="logos.trusted">Trusted by designers and teams at</p>
+            <div class="logo-grid">
+                <div class="logo-item">
+                    <svg viewBox="0 0 100 40" width="100" height="40">
+                        <rect x="10" y="15" width="80" height="10" rx="2" fill="#E0E0E0"/>
+                    </svg>
+                </div>
+                <div class="logo-item">
+                    <svg viewBox="0 0 100 40" width="100" height="40">
+                        <circle cx="50" cy="20" r="15" fill="#E0E0E0"/>
+                    </svg>
+                </div>
+                <div class="logo-item">
+                    <svg viewBox="0 0 100 40" width="100" height="40">
+                        <polygon points="30,10 70,10 80,20 70,30 30,30 20,20" fill="#E0E0E0"/>
+                    </svg>
+                </div>
+                <div class="logo-item">
+                    <svg viewBox="0 0 100 40" width="100" height="40">
+                        <rect x="20" y="10" width="60" height="20" rx="10" fill="#E0E0E0"/>
+                    </svg>
+                </div>
+                <div class="logo-item">
+                    <svg viewBox="0 0 100 40" width="100" height="40">
+                        <path d="M30,10 L70,10 L80,20 L70,30 L30,30 L20,20 Z" fill="#E0E0E0"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="features.title">How DesignAI Works</h2>
+                <p data-i18n="features.subtitle">From text to design in three simple steps</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <rect x="8" y="16" width="32" height="16" rx="4" fill="#0066FF"/>
+                            <path d="M14 24h20" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="features.step1.title">Describe Your Design</h3>
+                    <p data-i18n="features.step1.desc">Enter a detailed description of the UI you want to create. Be as specific as you like about layout, colors, and components.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <path d="M24 8v32M8 24h32" stroke="#0066FF" stroke-width="4"/>
+                            <circle cx="24" cy="24" r="16" fill="none" stroke="#0066FF" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="features.step2.title">AI Generates Options</h3>
+                    <p data-i18n="features.step2.desc">Our AI analyzes your description and generates multiple design options based on the latest UI/UX principles and trends.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <rect x="8" y="8" width="32" height="32" rx="4" fill="none" stroke="#0066FF" stroke-width="2"/>
+                            <path d="M16 24l6 6 12-12" stroke="#0066FF" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="features.step3.title">Export & Customize</h3>
+                    <p data-i18n="features.step3.desc">Download your design in multiple formats (HTML/CSS, Figma, SVG) or refine it further with simple text commands.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="playground" class="playground">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="playground.title">Try The AI Design Assistant</h2>
+                <p data-i18n="playground.subtitle">See how our AI transforms your text into UI designs in real-time</p>
+            </div>
+            <div class="playground-interface">
+                <div class="playground-input">
+                    <div class="input-header">
+                        <h3 data-i18n="playground.inputTitle">Your Design Description</h3>
+                        <div class="template-dropdown">
+                            <label for="template-select" data-i18n="playground.templates">Templates:</label>
+                            <select id="template-select">
+                                <option value="" data-i18n="playground.customPrompt">Custom prompt</option>
+                                <option value="dashboard" data-i18n="playground.dashboardTemplate">Dashboard</option>
+                                <option value="landing" data-i18n="playground.landingTemplate">Landing page</option>
+                                <option value="mobile" data-i18n="playground.mobileTemplate">Mobile app</option>
+                                <option value="form" data-i18n="playground.formTemplate">Form</option>
+                            </select>
+                        </div>
+                    </div>
+                    <textarea id="design-prompt" placeholder="Describe the UI you want to create..." data-i18n-placeholder="playground.promptPlaceholder"></textarea>
+                    <div class="control-panel">
+                        <div class="style-options">
+                            <div class="option-group">
+                                <label data-i18n="playground.style">Style:</label>
+                                <div class="radio-group">
+                                    <input type="radio" id="style-minimal" name="style" value="minimal" checked>
+                                    <label for="style-minimal" data-i18n="playground.styleMinimal">Minimal</label>
+                                    <input type="radio" id="style-modern" name="style" value="modern">
+                                    <label for="style-modern" data-i18n="playground.styleModern">Modern</label>
+                                    <input type="radio" id="style-playful" name="style" value="playful">
+                                    <label for="style-playful" data-i18n="playground.stylePlayful">Playful</label>
+                                </div>
+                            </div>
+                            <div class="option-group">
+                                <label data-i18n="playground.theme">Theme:</label>
+                                <div class="radio-group">
+                                    <input type="radio" id="theme-light" name="theme" value="light" checked>
+                                    <label for="theme-light" data-i18n="playground.themeLight">Light</label>
+                                    <input type="radio" id="theme-dark" name="theme" value="dark">
+                                    <label for="theme-dark" data-i18n="playground.themeDark">Dark</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="generate-button" class="btn btn-primary" data-i18n="playground.generateBtn">Generate Design</button>
+                    </div>
+                </div>
+                <div class="playground-output">
+                    <div class="output-header">
+                        <h3 data-i18n="playground.resultTitle">Generated Design</h3>
+                        <div class="output-controls">
+                            <button id="refresh-button" class="icon-button" title="Regenerate" data-i18n-title="playground.regenerate">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-8 3.58-8 8s3.58 8 8 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                            <button id="download-button" class="icon-button" title="Download" data-i18n-title="playground.download">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="result-display">
+                        <div id="loading-indicator" class="hidden">
+                            <div class="spinner"></div>
+                            <p data-i18n="playground.generating">Generating your design...</p>
+                        </div>
+                        <div id="result-container">
+                            <div class="placeholder-message" data-i18n="playground.enterPrompt">
+                                Enter a description and click "Generate Design" to see the result
+                            </div>
+                        </div>
+                    </div>
+                    <div class="export-options">
+                        <label data-i18n="playground.exportAs">Export as:</label>
+                        <button class="btn btn-small" data-format="html" data-i18n="playground.htmlcss">HTML/CSS</button>
+                        <button class="btn btn-small" data-format="svg" data-i18n="playground.svg">SVG</button>
+                        <button class="btn btn-small" data-format="figma" data-i18n="playground.figma">Figma</button>
+                        <button class="btn btn-small" data-format="react" data-i18n="playground.react">React</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="benefits.title">Why Designers & Developers Love DesignAI</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <circle cx="24" cy="24" r="20" fill="none" stroke="#0066FF" stroke-width="2"/>
+                            <path d="M14 24l8 8 12-12" stroke="#0066FF" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="benefits.time.title">Save 80% Design Time</h3>
+                    <p data-i18n="benefits.time.desc">Go from idea to visuals in seconds instead of hours. Focus on refining rather than creating from scratch.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <path d="M12 35l24-22M12 13l24 22" stroke="#0066FF" stroke-width="2"/>
+                            <circle cx="12" cy="13" r="5" fill="none" stroke="#0066FF" stroke-width="2"/>
+                            <circle cx="36" cy="13" r="5" fill="none" stroke="#0066FF" stroke-width="2"/>
+                            <circle cx="12" cy="35" r="5" fill="none" stroke="#0066FF" stroke-width="2"/>
+                            <circle cx="36" cy="35" r="5" fill="none" stroke="#0066FF" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="benefits.iteration.title">Rapid Iteration</h3>
+                    <p data-i18n="benefits.iteration.desc">Generate multiple design variations instantly and iterate quickly based on feedback.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <rect x="8" y="8" width="32" height="32" rx="4" fill="none" stroke="#0066FF" stroke-width="2"/>
+                            <path d="M16 24l6 6 12-12" stroke="#0066FF" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="benefits.skills.title">No Design Skills Needed</h3>
+                    <p data-i18n="benefits.skills.desc">Simply describe what you want in plain language. Our AI handles all the design complexity.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <path d="M16 8l8 16 8-16" stroke="#0066FF" stroke-width="2"/>
+                            <rect x="8" y="24" width="32" height="16" rx="4" fill="none" stroke="#0066FF" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="benefits.formats.title">Multiple Export Formats</h3>
+                    <p data-i18n="benefits.formats.desc">Download designs as ready-to-use HTML/CSS, SVG, or export directly to Figma or as React components.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="compare" class="comparison">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="compare.title">How DeepSeek AI UI UX Design Compares</h2>
+                <p data-i18n="compare.subtitle">See why our AI design solution outperforms traditional methods and competitors</p>
+            </div>
+            <div class="comparison-table-container">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="compare.feature">Feature/Capability</th>
+                            <th data-i18n="compare.designai">DeepSeek AI UI UX</th>
+                            <th data-i18n="compare.traditional">Traditional Design</th>
+                            <th data-i18n="compare.competitor1">same.new</th>
+                            <th data-i18n="compare.competitor2">copyweb.ai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-i18n="compare.speed">Design Generation Speed</td>
+                            <td class="highlight"><span class="check">✓</span> Seconds</td>
+                            <td>Hours to Days</td>
+                            <td>Minutes</td>
+                            <td>Minutes to Hours</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="compare.skill">Required Skill Level</td>
+                            <td class="highlight"><span class="check">✓</span> No Experience</td>
+                            <td>Expert</td>
+                            <td>Intermediate</td>
+                            <td>Basic</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="compare.input">Input Method</td>
+                            <td class="highlight"><span class="check">✓</span> Text Description</td>
+                            <td>Manual Coding</td>
+                            <td>URL/Screenshot</td>
+                            <td>URL/Screenshot</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="compare.export">Export Formats</td>
+                            <td class="highlight"><span class="check">✓</span> 6+ Formats</td>
+                            <td>Limited</td>
+                            <td>3-4 Formats</td>
+                            <td>2-3 Formats</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="compare.iteration">Iteration Speed</td>
+                            <td class="highlight"><span class="check">✓</span> Instant</td>
+                            <td>Slow</td>
+                            <td>Fast</td>
+                            <td>Moderate</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="compare.custom">Customization</td>
+                            <td class="highlight"><span class="check">✓</span> Full Control</td>
+                            <td>Full Control</td>
+                            <td>Limited</td>
+                            <td>Moderate</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="compare.component">Component Library</td>
+                            <td class="highlight"><span class="check">✓</span> Unlimited</td>
+                            <td>Manual Creation</td>
+                            <td>Limited Set</td>
+                            <td>Moderate Set</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="compare.trends">Design Trends</td>
+                            <td class="highlight"><span class="check">✓</span> Auto-Updated</td>
+                            <td>Requires Research</td>
+                            <td>Semi-Updated</td>
+                            <td>Infrequent Updates</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="pain-points">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="painPoints.title">Common Design Challenges Solved</h2>
+                <p data-i18n="painPoints.subtitle">How DesignAI eliminates traditional design roadblocks</p>
+            </div>
+            <div class="pain-points-grid">
+                <div class="pain-point-card">
+                    <div class="pain-point-header">
+                        <div class="pain-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="#FF3D57"/>
+                            </svg>
+                        </div>
+                        <h3 data-i18n="painPoints.time.title">Time-Consuming Design Process</h3>
+                    </div>
+                    <p data-i18n="painPoints.time.problem">Traditional UI design requires hours of work, multiple iterations, and skilled designers.</p>
+                    <div class="solution">
+                        <strong data-i18n="painPoints.solution">DesignAI Solution:</strong>
+                        <p data-i18n="painPoints.time.solution">Generate complete designs in seconds with a single text prompt, allowing you to focus on refinement rather than starting from scratch.</p>
+                    </div>
+                </div>
+                <div class="pain-point-card">
+                    <div class="pain-point-header">
+                        <div class="pain-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="#FF3D57"/>
+                            </svg>
+                        </div>
+                        <h3 data-i18n="painPoints.skills.title">Design Skills Barrier</h3>
+                    </div>
+                    <p data-i18n="painPoints.skills.problem">Developers and product managers often lack the design expertise needed to create professional UIs.</p>
+                    <div class="solution">
+                        <strong data-i18n="painPoints.solution">DesignAI Solution:</strong>
+                        <p data-i18n="painPoints.skills.solution">Our AI bridges the gap by turning text descriptions into professional designs, democratizing the design process for everyone on the team.</p>
+                    </div>
+                </div>
+                <div class="pain-point-card">
+                    <div class="pain-point-header">
+                        <div class="pain-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="#FF3D57"/>
+                            </svg>
+                        </div>
+                        <h3 data-i18n="painPoints.consistency.title">Design Inconsistency</h3>
+                    </div>
+                    <p data-i18n="painPoints.consistency.problem">Maintaining design consistency across multiple screens and components is challenging and error-prone.</p>
+                    <div class="solution">
+                        <strong data-i18n="painPoints.solution">DesignAI Solution:</strong>
+                        <p data-i18n="painPoints.consistency.solution">Our AI ensures perfect consistency by automatically applying the same design principles and styles across all generated elements.</p>
+                    </div>
+                </div>
+                <div class="pain-point-card">
+                    <div class="pain-point-header">
+                        <div class="pain-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="#FF3D57"/>
+                            </svg>
+                        </div>
+                        <h3 data-i18n="painPoints.prototype.title">Slow Prototyping</h3>
+                    </div>
+                    <p data-i18n="painPoints.prototype.problem">Creating multiple design options for testing and feedback is resource-intensive and slows development.</p>
+                    <div class="solution">
+                        <strong data-i18n="painPoints.solution">DesignAI Solution:</strong>
+                        <p data-i18n="painPoints.prototype.solution">Generate countless variations in seconds, test different approaches, and iterate rapidly based on feedback, accelerating your product development cycle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="testimonials.title">What Our Users Say</h2>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-slide active">
+                    <div class="testimonial-content">
+                        <div class="quote-mark">
+                            <svg viewBox="0 0 36 36" width="36" height="36">
+                                <path d="M10 15h5v-5H5v10c0 2.757 2.243 5 5 5s5-2.243 5-5-2.243-5-5-5zM26 15h5v-5H21v10c0 2.757 2.243 5 5 5s5-2.243 5-5-2.243-5-5-5z" fill="#0066FF"/>
+                            </svg>
+                        </div>
+                        <p data-i18n="testimonials.quote1">DesignAI has completely transformed our workflow. What used to take days now takes minutes. Our team can focus on strategy and implementation rather than getting bogged down in UI design details.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <svg viewBox="0 0 40 40" width="40" height="40">
+                                    <circle cx="20" cy="20" r="20" fill="#E0E0E0"/>
+                                </svg>
+                            </div>
+                            <div class="author-info">
+                                <h4 data-i18n="testimonials.author1">Sarah Johnson</h4>
+                                <p data-i18n="testimonials.role1">Product Manager at TechCorp</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="quote-mark">
+                            <svg viewBox="0 0 36 36" width="36" height="36">
+                                <path d="M10 15h5v-5H5v10c0 2.757 2.243 5 5 5s5-2.243 5-5-2.243-5-5-5zM26 15h5v-5H21v10c0 2.757 2.243 5 5 5s5-2.243 5-5-2.243-5-5-5z" fill="#0066FF"/>
+                            </svg>
+                        </div>
+                        <p data-i18n="testimonials.quote2">As a developer with limited design skills, DesignAI is a game-changer. I can now create professional-looking UIs without needing to hire a designer for every small project.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <svg viewBox="0 0 40 40" width="40" height="40">
+                                    <circle cx="20" cy="20" r="20" fill="#E0E0E0"/>
+                                </svg>
+                            </div>
+                            <div class="author-info">
+                                <h4 data-i18n="testimonials.author2">Alex Chen</h4>
+                                <p data-i18n="testimonials.role2">Full-Stack Developer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="quote-mark">
+                            <svg viewBox="0 0 36 36" width="36" height="36">
+                                <path d="M10 15h5v-5H5v10c0 2.757 2.243 5 5 5s5-2.243 5-5-2.243-5-5-5zM26 15h5v-5H21v10c0 2.757 2.243 5 5 5s5-2.243 5-5-2.243-5-5-5z" fill="#0066FF"/>
+                            </svg>
+                        </div>
+                        <p data-i18n="testimonials.quote3">We've cut our design time by 70% using DesignAI. The ability to quickly generate and iterate on designs has been invaluable for presenting options to clients and getting projects approved faster.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <svg viewBox="0 0 40 40" width="40" height="40">
+                                    <circle cx="20" cy="20" r="20" fill="#E0E0E0"/>
+                                </svg>
+                            </div>
+                            <div class="author-info">
+                                <h4 data-i18n="testimonials.author3">Maria Garcia</h4>
+                                <p data-i18n="testimonials.role3">Design Director at CreativeStudio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-dot active" data-slide="0"></button>
+                    <button class="slider-dot" data-slide="1"></button>
+                    <button class="slider-dot" data-slide="2"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="showcase">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="showcase.title">Design Showcase</h2>
+                <p data-i18n="showcase.subtitle">See how our AI transforms inputs of varying complexity into beautiful designs</p>
+            </div>
+            <div class="showcase-tabs">
+                <!-- Tabs will be populated from JSON data -->
+            </div>
+            <div class="showcase-filters">
+                <span data-i18n="showcase.filterBy">Filter by:</span>
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="saas">SaaS</button>
+                <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+                <button class="filter-btn" data-filter="social">Social</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="dashboard">Dashboard</button>
+                <button class="filter-btn" data-filter="game">Game</button>
+            </div>
+            <div class="showcase-filters model-filters">
+                <span>DeepSeek Model:</span>
+                <button class="filter-btn active" data-model="all">All</button>
+                <button class="filter-btn" data-model="r1">r1</button>
+                <button class="filter-btn" data-model="v3">v3</button>
+                <button class="filter-btn" data-model="v3-0324">v3-0324</button>
+            </div>
+            <div class="showcase-content">
+                <!-- Showcase content will be populated from JSON data -->
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="pricing.title">Simple, Transparent Pricing</h2>
+                <p data-i18n="pricing.subtitle">Choose the plan that fits your needs</p>
+            </div>
+            <div class="pricing-toggle">
+                <span data-i18n="pricing.monthly">Monthly</span>
+                <label class="switch">
+                    <input type="checkbox" id="billing-toggle">
+                    <span class="slider round"></span>
+                </label>
+                <span><span data-i18n="pricing.annual">Annual</span> <span class="save-badge" data-i18n="pricing.save">Save 20%</span></span>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 data-i18n="pricing.free.title">Free</h3>
+                        <div class="pricing-price">
+                            <span class="price">$0</span>
+                            <span class="period" data-i18n="pricing.forever">Forever</span>
+                        </div>
+                        <p data-i18n="pricing.free.desc">Perfect for trying out DesignAI</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li data-i18n="pricing.free.feature1">10 designs per month</li>
+                            <li data-i18n="pricing.free.feature2">Basic export formats (PNG, SVG)</li>
+                            <li data-i18n="pricing.free.feature3">Standard design styles</li>
+                            <li data-i18n="pricing.free.feature4">Community support</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <button class="btn btn-outline btn-full" data-i18n="pricing.free.cta">Get Started</button>
+                    </div>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-tag" data-i18n="pricing.popular">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3 data-i18n="pricing.pro.title">Pro</h3>
+                        <div class="pricing-price">
+                            <span class="price monthly">$29</span>
+                            <span class="price annual">$23</span>
+                            <span class="period" data-i18n="pricing.perMonth">per month</span>
+                        </div>
+                        <p data-i18n="pricing.pro.desc">For designers and developers</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li data-i18n="pricing.pro.feature1">Unlimited designs</li>
+                            <li data-i18n="pricing.pro.feature2">All export formats (HTML/CSS, Figma, React)</li>
+                            <li data-i18n="pricing.pro.feature3">Advanced style customization</li>
+                            <li data-i18n="pricing.pro.feature4">Priority support</li>
+                            <li data-i18n="pricing.pro.feature5">Design history & revisions</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <button class="btn btn-primary btn-full" data-i18n="pricing.pro.cta">Try Free for 7 Days</button>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 data-i18n="pricing.team.title">Team</h3>
+                        <div class="pricing-price">
+                            <span class="price monthly">$79</span>
+                            <span class="price annual">$63</span>
+                            <span class="period" data-i18n="pricing.perMonth">per month</span>
+                        </div>
+                        <p data-i18n="pricing.team.desc">For teams and agencies</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li data-i18n="pricing.team.feature1">Everything in Pro plan</li>
+                            <li data-i18n="pricing.team.feature2">5 team members (add more for $15/each)</li>
+                            <li data-i18n="pricing.team.feature3">Team design library</li>
+                            <li data-i18n="pricing.team.feature4">Design system generation</li>
+                            <li data-i18n="pricing.team.feature5">Custom branding</li>
+                            <li data-i18n="pricing.team.feature6">Dedicated account manager</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <button class="btn btn-outline btn-full" data-i18n="pricing.team.cta">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-guarantee">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" fill="#0066FF"/>
+                </svg>
+                <p data-i18n="pricing.guarantee">30-day money-back guarantee. No questions asked.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 data-i18n="cta.title">Ready to Transform Your Design Process?</h2>
+                <p data-i18n="cta.subtitle">Join thousands of designers and developers who've already switched to AI-powered design</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-large" data-i18n="cta.primary">Try DesignAI Free</button>
+                    <button class="btn btn-outline btn-large" data-i18n="cta.secondary">Schedule a Demo</button>
+                </div>
+                <div class="cta-features">
+                    <div class="cta-feature">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#0066FF"/>
+                        </svg>
+                        <span data-i18n="cta.nocc">No credit card required</span>
+                    </div>
+                    <div class="cta-feature">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#0066FF"/>
+                        </svg>
+                        <span data-i18n="cta.setup">Easy setup</span>
+                    </div>
+                    <div class="cta-feature">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#0066FF"/>
+                        </svg>
+                        <span data-i18n="cta.cancel">Cancel anytime</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 32 32" width="32" height="32">
+                            <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm0 30c-7.732 0-14-6.268-14-14S8.268 2 16 2s14 6.268 14 14-6.268 14-14 14z" fill="#0066FF"/>
+                            <path d="M20 12c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-8 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" fill="#0066FF"/>
+                        </svg>
+                        <span data-i18n="common.appName">DeepSeek AI UI UX Design</span>
+                    </div>
+                    <p data-i18n="footer.tagline">AI-powered design assistant that transforms ideas into beautiful UI designs in seconds.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.28 4.28 0 004 2.98 8.521 8.521 0 01-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h8.62v-6.97h-2.34V11h2.34V8.95c0-2.33 1.42-3.6 3.5-3.6 1 0 1.84.07 2.1.1v2.43h-1.44c-1.13 0-1.35.53-1.35 1.32V11h2.7l-.35 3.03h-2.35V21H20a1 1 0 001-1V4a1 1 0 00-1-1z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.848 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer.product">Product</h3>
+                    <ul>
+                        <li><a href="#features" data-i18n="footer.features">Features</a></li>
+                        <li><a href="#pricing" data-i18n="footer.pricing">Pricing</a></li>
+                        <li><a href="#" data-i18n="footer.customers">Customers</a></li>
+                        <li><a href="#" data-i18n="footer.whatsnew">What's New</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer.company">Company</h3>
+                    <ul>
+                        <li><a href="#" data-i18n="footer.about">About Us</a></li>
+                        <li><a href="#" data-i18n="footer.careers">Careers</a></li>
+                        <li><a href="#" data-i18n="footer.blog">Blog</a></li>
+                        <li><a href="#" data-i18n="footer.press">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer.resources">Resources</h3>
+                    <ul>
+                        <li><a href="#" data-i18n="footer.docs">Documentation</a></li>
+                        <li><a href="#" data-i18n="footer.tutorials">Tutorials</a></li>
+                        <li><a href="#" data-i18n="footer.support">Support</a></li>
+                        <li><a href="#" data-i18n="footer.api">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer.legal">Legal</h3>
+                    <ul>
+                        <li><a href="#" data-i18n="footer.privacy">Privacy Policy</a></li>
+                        <li><a href="#" data-i18n="footer.terms">Terms of Service</a></li>
+                        <li><a href="#" data-i18n="footer.security">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2023 DesignAI. <span data-i18n="footer.rights">All rights reserved.</span></p>
+                </div>
+                <div class="language-selector">
+                    <label for="language-select" data-i18n="footer.language">Language:</label>
+                    <select id="language-select">
+                        <option value="en">English</option>
+                        <option value="zh">中文</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="ja">日本語</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
+    <script src="js/playground.js" type="module"></script>
+    <script src="js/testimonials.js" type="module"></script>
+    <script src="js/pricing.js" type="module"></script>
+    <script src="js/i18n.js" type="module"></script>
 </body>
 </html>
